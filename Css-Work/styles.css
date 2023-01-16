@@ -1,0 +1,32 @@
+:root {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  position: absolute;
+  width: 33%;
+}
+
+form {
+  margin: auto;
+  border: 5px solid black;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+}
+
+input#first_name,
+input#last_name {
+  max-width: 15em;
+}
+
+input#email {
+  max-width: 25em;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Document</title>
+    <script src="./form.js" defer></script>
+  </head>
+  <body>
+    <form action="" method="post">
+      <legend>Contant Form</legend>
+      <fieldset>
+        <label for="first_name">First Name:</label>
+        <input
+          type="text"
+          id="first_name"
+          name="first_name"
+          placeholder="John"
+          required
+        />
+        <label for="last_name">Last Name:</label>
+        <input
+          type="text"
+          name="last_name"
+          id="last_name"
+          placeholder="Appleseed"
+          required
+        />
+        <label for="email">Email: </label>
+        <input
+          type="text"
+          name="email"
+          id="email"
+          placeholder="you@example.com"
+          required
+        />
+      </fieldset>
+      <fieldset>
+        <label for="message">Message:</label>
+        <textarea
+          name="message"
+          id="message"
+          cols="30"
+          rows="10"
+          placeholder="Message here"
+          required
+        ></textarea>
+      </fieldset>
+      <button type="submit" id="msgSend">Send it!</button>
+    </form>
+  </body>
+</html>
