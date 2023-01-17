@@ -1,0 +1,59 @@
+body {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1850' height='1000' preserveAspectRatio='none' viewBox='0 0 1850 1000'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1196%26quot%3b)' fill='none'%3e%3crect width='1850' height='1000' x='0' y='0' fill='url(%23SvgjsLinearGradient1197)'%3e%3c/rect%3e%3cpath d='M 0%2c25 C 41.2%2c56 123.6%2c171.2 206%2c180 C 288.4%2c188.8 329.6%2c65.4 412%2c69 C 494.4%2c72.6 535.6%2c189.8 618%2c198 C 700.4%2c206.2 741.6%2c85.2 824%2c110 C 906.4%2c134.8 947.6%2c315 1030%2c322 C 1112.4%2c329 1153.6%2c158.4 1236%2c145 C 1318.4%2c131.6 1359.6%2c257.8 1442%2c255 C 1524.4%2c252.2 1566.4%2c117.4 1648%2c131 C 1729.6%2c144.6 1809.6%2c284.6 1850%2c323L1850 1000L0 1000z' fill='%23aecb87'%3e%3c/path%3e%3cpath d='M 0%2c575 C 74%2c556.4 222%2c480.8 370%2c482 C 518%2c483.2 592%2c590.6 740%2c581 C 888%2c571.4 962%2c421.6 1110%2c434 C 1258%2c446.4 1332%2c662.2 1480%2c643 C 1628%2c623.8 1776%2c399 1850%2c338L1850 1000L0 1000z' fill='%23184a7e'%3e%3c/path%3e%3cpath d='M 0%2c722 C 46.4%2c776 139.2%2c979.8 232%2c992 C 324.8%2c1004.2 371.2%2c789.4 464%2c783 C 556.8%2c776.6 603.2%2c963.2 696%2c960 C 788.8%2c956.8 835.2%2c763.4 928%2c767 C 1020.8%2c770.6 1067.2%2c978.6 1160%2c978 C 1252.8%2c977.4 1299.2%2c766.4 1392%2c764 C 1484.8%2c761.6 1532.4%2c966.8 1624%2c966 C 1715.6%2c965.2 1804.8%2c801.2 1850%2c760L1850 1000L0 1000z' fill='%232264ab'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1196'%3e%3crect width='1850' height='1000' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='50%25' y1='100%25' x2='50%25' y2='0%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1197'%3e%3cstop stop-color='%230e2a47' offset='0'%3e%3c/stop%3e%3cstop stop-color='rgba(93%2c 141%2c 202%2c 1)' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  background-color: white;
+  border: 4px solid black;
+  min-width: 750px;
+}
+
+form > legend {
+  margin: 1em;
+  text-align: center;
+  font-weight: 900;
+}
+
+form > fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+}
+
+fieldset > label {
+  margin-top: 1em;
+}
+
+fieldset > input:invalid {
+  border: 1.5px solid red;
+}
+
+fieldset > input:valid,
+fieldset > input:focus {
+  border: 2.5px solid green;
+}
+
+fieldset > input#first_name,
+fieldset > input#last_name {
+  max-width: 9em;
+}
+
+div#msgSend {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 1em;
+  margin-bottom: 0.5em;
+}
+
+div > button {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5em 1.5em 0.5em 1.5em;
+  cursor: pointer;
+}
