@@ -19,15 +19,18 @@ class Book {
 
 class newBook extends Book {
   addBookToLibrary(book) {
-    myLibrary = [book];
+    myLibrary.push(book);
   }
 }
 
 function appendClass() {
-  myLibrary.forEach((book) => (books.appendChild(p).textContent = book));
+  myLibrary.forEach((book) => {
+    books.innerHTML += book;
+  });
 }
 
 btn.addEventListener("click", (event) => {
+  console.log(myLibrary);
   if (title && author && pages !== null) {
     event.preventDefault();
     const currentBook = new newBook();
