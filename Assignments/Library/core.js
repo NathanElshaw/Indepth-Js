@@ -1,42 +1,31 @@
-const btn = document.querySelector("#addBook");
-const title = document.querySelector("#title").value;
-const author = document.querySelector("#author").value;
-const pages = document.querySelector("#pages").value;
-const books = document.querySelector("#book");
-const p = document.createElement("p");
-let myLibrary = [];
-let addNewBook = "";
+//const btn = document.querySelector("#addBook");
+//const title = document.querySelector("#title").value;
+//const author = document.querySelector("#author").value;
+//const pages = document.querySelector("#pages").value;
+//const books = document.querySelector("#book");
+//const p = document.createElement("p");
+//let myLibrary = [];
 
-class Book {
-  addBook(title, author, pages) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
+/*
+Get input from the Form
+then we need to put the data from the form into a book
+then add the book to the myLibrary
+then show said book in the "shelf" where you can changed how many pages read and if youve finishd the book
+*/
 
-    addNewBook = `${title}, By: ${author}, ${pages} pages`;
+function Book(title, author, pages, pagesRead, isDone) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.pagesRead = pagesRead;
+  this.isDone = isDone;
+
+  function getHtmlMarkUp() {
+    const html_template = `
+    div`;
   }
 }
 
-class newBook extends Book {
-  addBookToLibrary(book) {
-    myLibrary.push(book);
-  }
-}
+var newBook = new Book("The Hobbit", "J.R.R Tolkin", 958, 312, false);
 
-function appendClass() {
-  myLibrary.forEach((book) => {
-    books.innerHTML += book;
-  });
-}
-
-btn.addEventListener("click", (event) => {
-  console.log(myLibrary);
-  if (title && author && pages !== null) {
-    event.preventDefault();
-    const currentBook = new newBook();
-    currentBook.addBook(title, author, pages);
-    currentBook.addBookToLibrary(addNewBook);
-    appendClass();
-  }
-  event.preventDefault();
-});
+newBook.sayTitle();

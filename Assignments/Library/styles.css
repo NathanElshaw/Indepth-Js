@@ -1,0 +1,16 @@
+.rows {
+  display: flex;
+  flex-direction: rows;
+  width: fit-content;
+  gap: 2em;
+  margin-top: 1em;
+}
+
+.card {
+  display: grid;
+  flex: 1;
+  flex-direction: column;
+  width: fit-content;
+  padding: 2em;
+  border: 1px solid black;
+}
