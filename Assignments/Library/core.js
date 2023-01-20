@@ -1,23 +1,26 @@
 const btn = document.querySelector("#addBook");
-const title = document.querySelector("#title").value;
-const author = document.querySelector("#author").value;
+const inputTitle = document.querySelector("#title");
+const author = document.querySelector("#author");
 const pagesRead = document.querySelector("#pagesRead");
-const pages = document.querySelector("#pages").value;
+const pages = document.querySelector("#pages");
+const hasRead = document.querySelector("#hasRead");
 const books = document.querySelector("#book");
 const ifError = document.querySelector("#ifError");
 
+var objId = 0;
 let myLibrary = [];
-let id = 0;
-let sign = "";
-let card = "";
-let remove = "";
+
 let cardRemove = "";
+let remove = "";
 /*
 Get input from the Form
 then we need to put the data from the form into a book
 then add the book to the myLibrary
 then show said book in the "shelf" where you can changed how many pages read and if youve finishd the book
 */
+
+var book = "book";
+
 class Book {
   constructor(title, author, pagesRead, pages, hasRead, id) {
     this.title = title;
@@ -29,10 +32,11 @@ class Book {
   }
 
   addBooks() {
+    objId = myLibrary.length * 1;
     books.innerHTML = "";
     myLibrary.forEach((book) => {
       books.innerHTML += `
-<div class="card" value="${myLibrary.indexOf(book)}">      
+<div class="card" value="${book.id}">      
   <div>
     <h2>Title: ${book.title}</h2>
   </div>
@@ -48,12 +52,13 @@ class Book {
     <div>
       <p>Has Read : ${book.hasRead}</p >
     </div>
-    <button id="remove" value="${book.id}">Remove</button>
+    <button id="remove" value="${myLibrary.indexOf(book)}">Remove</button>
   </div>       
 </div>`;
     });
     cardRemove = document.querySelector("#remove");
     remove = document.querySelectorAll("#remove");
+    afterInit();
   }
 
   addBookToLibrary() {
@@ -67,23 +72,30 @@ class Book {
     }
   }
 }
-let book = "book";
 
 var global = new Book();
 //newBook.addBooks();
 
 btn.addEventListener("click", (event) => {
-  global = new Book(title, author, pagesRead, pages, false, id);
-  id++;
-  global.addBookToLibrary();
-  global.addBooks();
+  window[book + objId] = new Book(
+    inputTitle.value,
+    author.value,
+    pagesRead.value,
+    pages.value,
+    false,
+    objId
+  );
+  window[book + objId].addBookToLibrary();
+  window[book + objId].addBooks();
   event.preventDefault();
 });
 
-remove.forEach((remove) =>
-  remove.addEventListener("click", () => {
-    console.log(remove.value);
-    myLibrary.splice(remove.value - 1, 1);
-    global.addBooks();
-  })
-);
+function afterInit() {
+  remove.forEach((remove) =>
+    remove.addEventListener("click", () => {
+      console.log(remove.value);
+      myLibrary.splice(remove.value, 1);
+      global.addBooks();
+    })
+  );
+}
