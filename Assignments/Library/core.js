@@ -77,7 +77,7 @@ var global = new Book();
 //newBook.addBooks();
 
 btn.addEventListener("click", (event) => {
-  window[book + objId] = new Book(
+  this[book + objId] = new Book(
     inputTitle.value,
     author.value,
     pagesRead.value,
@@ -85,8 +85,8 @@ btn.addEventListener("click", (event) => {
     false,
     objId
   );
-  window[book + objId].addBookToLibrary();
-  window[book + objId].addBooks();
+  this[book + objId].addBookToLibrary();
+  this[book + objId].addBooks();
   event.preventDefault();
 });
 
