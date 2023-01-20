@@ -1,11 +1,14 @@
 const btn = document.querySelector("#addBook");
-//const title = document.querySelector("#title").value;
-//const author = document.querySelector("#author").value;
-//const pages = document.querySelector("#pages").value;
+const title = document.querySelector("#title").value;
+const author = document.querySelector("#author").value;
+const pagesRead = document.querySelector("#pagesRead");
+const pages = document.querySelector("#pages").value;
 const books = document.querySelector("#book");
 const ifError = document.querySelector("#ifError");
+
 let myLibrary = [];
 let id = 0;
+let sign = "";
 let card = "";
 let remove = "";
 let cardRemove = "";
@@ -29,7 +32,7 @@ class Book {
     books.innerHTML = "";
     myLibrary.forEach((book) => {
       books.innerHTML += `
-<div class="card" value="${book.id}">      
+<div class="card" value="${myLibrary.indexOf(book)}">      
   <div>
     <h2>Title: ${book.title}</h2>
   </div>
@@ -58,33 +61,29 @@ class Book {
     const found = myLibrary.some((check) => check.title === this.title);
     if (!found) {
       myLibrary.push(this);
-    } else ifError.textContent = "This Book already exists";
+    } else {
+      ifError.textContent = "This Book already exists";
+      console.log(this.title);
+    }
   }
 }
+let book = "book";
 
-var newBook = new Book("The Hobbit", "J.R.R Tolkin", 958, 312, false, id);
-id++;
-var newBook2 = new Book("Star Wars", "J.R.R Tolkin", 958, 312, false, id);
-id++;
-var newBook3 = new Book("New one", "J.R.R Tolkin", 958, 312, false);
-
+var global = new Book();
 //newBook.addBooks();
-newBook.addBookToLibrary();
-newBook2.addBookToLibrary();
-
-newBook2.addBooks();
 
 btn.addEventListener("click", (event) => {
-  newBook3.addBookToLibrary();
-  newBook3.addBooks();
+  global = new Book(title, author, pagesRead, pages, false, id);
+  id++;
+  global.addBookToLibrary();
+  global.addBooks();
   event.preventDefault();
 });
 
 remove.forEach((remove) =>
   remove.addEventListener("click", () => {
-    myLibrary.splice(remove.value, 1);
-    this.addBookToLibrary();
+    console.log(remove.value);
+    myLibrary.splice(remove.value - 1, 1);
+    global.addBooks();
   })
 );
-
-//myLibrary.some((check) => check.id == remove.value)
