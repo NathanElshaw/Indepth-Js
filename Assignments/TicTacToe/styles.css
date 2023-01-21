@@ -1,0 +1,26 @@
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+form {
+  margin-bottom: 4em;
+}
+
+.gameContain {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 0;
+}
+
+button {
+  flex: 1;
+  display: flex;
+  border-radius: 0%;
+  font-size: larger;
+  padding: 1em;
+}
