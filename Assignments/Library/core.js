@@ -61,11 +61,25 @@ class Book {
     </div>
   </div>       
 </div>`;
+      cardRemove = document.querySelector("#remove");
+      remove = document.querySelectorAll("#remove");
+      updateCheck = document.querySelectorAll("#updateCheck");
+      remove.forEach((remove) => {
+        remove.addEventListener("click", () => {
+          console.log(remove.value);
+          myLibrary.splice(remove.value, 1);
+        });
+      });
+      updateCheck.forEach((update) => {
+        update.addEventListener("change", () => {
+          if (book.hasRead == true) {
+            update.checked = true;
+          } else {
+            update.checked = false;
+          }
+        });
+      });
     });
-    cardRemove = document.querySelector("#remove");
-    remove = document.querySelectorAll("#remove");
-    updateCheck = document.querySelectorAll("#updateCheck");
-    afterInit();
   }
 
   addBookToLibrary() {
@@ -96,23 +110,3 @@ btn.addEventListener("click", (event) => {
   this[book + objId].addBooks();
   event.preventDefault();
 });
-
-function afterInit() {
-  remove.forEach((remove) =>
-    remove.addEventListener("click", () => {
-      console.log(remove.value);
-      myLibrary.splice(remove.value, 1);
-      global.addBooks();
-    })
-  );
-
-  updateCheck.forEach((update) => {
-    update.addEventListener("change", () => {
-      if (this.checked) {
-        myLibrary[update.value].hasRead = updateCheck.checked;
-      } else {
-        myLibrary[update.value].hasRead = updateCheck.checked;
-      }
-    });
-  });
-}
