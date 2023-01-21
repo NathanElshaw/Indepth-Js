@@ -52,7 +52,7 @@ class Book {
     </div>
     <button id="remove" value="${myLibrary.indexOf(book)}">Remove</button>
     <div id="updateCheck>
-    <label for="updateCheck" >Has Read: </label>
+    <label for="updateCheck">Has Read: </label>
     <input type="checkbox" name="updateCheck" id="updateCheck" value="${myLibrary.indexOf(
       book
     )}" />
