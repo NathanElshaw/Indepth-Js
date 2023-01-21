@@ -12,6 +12,7 @@ let myLibrary = [];
 
 let cardRemove = "";
 let remove = "";
+let updateCheck = "";
 /*
 Get input from the Form
 then we need to put the data from the form into a book
@@ -53,12 +54,17 @@ class Book {
       <p>Has Read : ${book.hasRead}</p >
     </div>
     <button id="remove" value="${myLibrary.indexOf(book)}">Remove</button>
-    <input type="checkbox" value="${myLibrary.indexOf(book)}>
+    <div>
+    <input type="checkbox" name="updateCheck" id="updateCheck" value="${myLibrary.indexOf(
+      book
+    )}" />
+    </div>
   </div>       
 </div>`;
     });
     cardRemove = document.querySelector("#remove");
     remove = document.querySelectorAll("#remove");
+    updateCheck = document.querySelectorAll("#updateCheck");
     afterInit();
   }
 
@@ -99,4 +105,14 @@ function afterInit() {
       global.addBooks();
     })
   );
+
+  updateCheck.forEach((update) => {
+    update.addEventListener("change", () => {
+      if (this.checked) {
+        myLibrary[update.value].hasRead = updateCheck.checked;
+      } else {
+        myLibrary[update.value].hasRead = updateCheck.checked;
+      }
+    });
+  });
 }
