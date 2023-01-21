@@ -10,9 +10,6 @@ const ifError = document.querySelector("#ifError");
 var objId = 0;
 let myLibrary = [];
 
-let cardRemove = "";
-let remove = "";
-let updateCheck = "";
 /*
 Get input from the Form
 then we need to put the data from the form into a book
@@ -51,32 +48,43 @@ class Book {
       <p>Pages: ${book.pages}</p>
     </div>
     <div>
-      <p>Has Read : ${book.hasRead}</p >
+      <p id="has-read">Has Read : ${book.hasRead}</p >
     </div>
     <button id="remove" value="${myLibrary.indexOf(book)}">Remove</button>
-    <div>
+    <div id="updateCheck>
+    <label for="updateCheck" >Has Read: </label>
     <input type="checkbox" name="updateCheck" id="updateCheck" value="${myLibrary.indexOf(
       book
     )}" />
     </div>
   </div>       
 </div>`;
-      cardRemove = document.querySelector("#remove");
-      remove = document.querySelectorAll("#remove");
-      updateCheck = document.querySelectorAll("#updateCheck");
+      const isRead = document.querySelectorAll("#has-read");
+      const remove = document.querySelectorAll("#remove");
+      const updateCheck = document.querySelectorAll("#updateCheck");
+
       remove.forEach((remove) => {
         remove.addEventListener("click", () => {
-          console.log(remove.value);
           myLibrary.splice(remove.value, 1);
+          refresh();
         });
       });
       updateCheck.forEach((update) => {
+        if (myLibrary[update.value].hasRead === true) {
+          update.checked = true;
+        } else {
+          update.checked = false;
+        }
+
         update.addEventListener("change", () => {
-          if (book.hasRead == true) {
-            update.checked = true;
-          } else {
-            update.checked = false;
+          if (update.checked == true) {
+            myLibrary[update.value].hasRead = true;
+          } else if (update.checked == false) {
+            myLibrary[update.value].hasRead = false;
           }
+          isRead.forEach((read) => {
+            read.textContent = `Has Read : ${myLibrary[update.value].hasRead}`;
+          });
         });
       });
     });
@@ -95,7 +103,9 @@ class Book {
 }
 
 var global = new Book();
-//newBook.addBooks();
+function refresh() {
+  global.addBooks();
+}
 
 btn.addEventListener("click", (event) => {
   this[book + objId] = new Book(
