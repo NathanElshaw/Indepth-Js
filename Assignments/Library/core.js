@@ -3,7 +3,7 @@ const inputTitle = document.querySelector("#title");
 const author = document.querySelector("#author");
 const pagesRead = document.querySelector("#pagesRead");
 const pages = document.querySelector("#pages");
-const hasRead = document.querySelector("#hasRead");
+const hasRead = document.querySelector("#is-read");
 const books = document.querySelector("#book");
 const ifError = document.querySelector("#ifError");
 
@@ -53,6 +53,7 @@ class Book {
       <p>Has Read : ${book.hasRead}</p >
     </div>
     <button id="remove" value="${myLibrary.indexOf(book)}">Remove</button>
+    <input type="checkbox" value="${myLibrary.indexOf(book)}>
   </div>       
 </div>`;
     });
@@ -82,7 +83,7 @@ btn.addEventListener("click", (event) => {
     author.value,
     pagesRead.value,
     pages.value,
-    false,
+    hasRead.checked,
     objId
   );
   this[book + objId].addBookToLibrary();
