@@ -40,10 +40,6 @@ function checkWin() {
 }
 
 log.addEventListener("click", () => {
-  console.log(usersMarks.toString());
-  if (usersMarks.toString() === "0,1,2") {
-    alert("you win");
-  } else {
-    console.log("no winner");
-  }
+  console.log(usersMarks);
+  console.log(usersMarks.includes((0, 0), (1, 1), (2, 2)));
 });
