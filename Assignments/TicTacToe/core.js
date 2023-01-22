@@ -1,9 +1,11 @@
 const gameBox = document.querySelectorAll("#gameBox");
 const markX = document.querySelector("#markX");
 const markO = document.querySelector("#markO");
+const log = document.querySelector("#log");
 
 let mark = "X";
 let arr = [];
+let usersMarks = [];
 markX.addEventListener("click", (event) => {
   markX.classList.add("assigned");
   markO.classList.remove("assigned");
@@ -20,15 +22,28 @@ markO.addEventListener("click", (event) => {
 const Player = () => {};
 
 gameBox.forEach((box) => {
+  arr.push(box);
   box.addEventListener("click", () => {
-    arr.push(box);
-    box.textContent = mark;
-    checkWin();
+    if (box.textContent == "") {
+      box.textContent = mark;
+      usersMarks.push(arr.indexOf(box));
+    } else {
+      console.log("cannot overwrite");
+    }
   });
 });
 
 function checkWin() {
-  if ((arr[(0, 2)].textContent = "O")) {
+  if (x) {
     alert("game over");
   }
 }
+
+log.addEventListener("click", () => {
+  console.log(usersMarks.toString());
+  if (usersMarks.toString() === "0,1,2") {
+    alert("you win");
+  } else {
+    console.log("no winner");
+  }
+});
