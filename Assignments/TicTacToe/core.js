@@ -3,6 +3,17 @@ const markX = document.querySelector("#markX");
 const markO = document.querySelector("#markO");
 const log = document.querySelector("#log");
 
+var winCheck = [
+  "0,1,2",
+  "0,3,6",
+  "2,5,8",
+  "3,4,5",
+  "6,7,8",
+  "0,4,8",
+  "2,4,6",
+  "1,4,7",
+];
+
 let mark = "X";
 let arr = [];
 let usersMarks = [];
@@ -33,13 +44,15 @@ gameBox.forEach((box) => {
   });
 });
 
-function checkWin() {
-  if (x) {
-    alert("game over");
+function easyAi() {
+  let aiPick = Math.floor(Math.random() * (8 - 0) + 0);
+  console.log(arr[aiPick].textContent);
+  if (arr[aiPick].textContent === "") {
+    arr[aiPick].textContent = "O";
+    console.log("set");
   }
 }
 
 log.addEventListener("click", () => {
-  console.log(usersMarks);
-  console.log(usersMarks.includes((0, 0), (1, 1), (2, 2)));
+  easyAi();
 });
