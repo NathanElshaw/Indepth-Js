@@ -7,7 +7,25 @@ body {
 }
 
 form {
-  margin-bottom: 4em;
+  margin-bottom: 3em;
+}
+
+.switch {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+.assigned {
+  background-color: darkgray;
+}
+
+#markX,
+#markO {
+  margin-top: 1em;
+  font-size: 20px;
+  width: 3em;
+  height: 3em;
 }
 
 .gameContain {
@@ -17,10 +35,13 @@ form {
   gap: 0;
 }
 
-button {
+#gameBox {
   flex: 1;
   display: flex;
   border-radius: 0%;
-  font-size: larger;
-  padding: 1em;
+  font-size: 100px;
+  width: 1em;
+  height: 1em;
+  align-items: center;
+  justify-content: center;
 }
