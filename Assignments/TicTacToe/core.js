@@ -3,6 +3,31 @@ const markX = document.querySelector("#markX");
 const markO = document.querySelector("#markO");
 const log = document.querySelector("#log");
 
+let userMark = "";
+
+function initMark() {
+  if (markX.className === "assigned") {
+    userMark = "X";
+  } else if (markO.className === "assigned") {
+    userMark = "O";
+  }
+}
+
+initMark();
+
+markO.addEventListener("click", (event) => {
+  event.preventDefault();
+  markO.classList.add("assigned");
+  markX.classList.remove("assigned");
+  initMark();
+});
+markX.addEventListener("click", (event) => {
+  event.preventDefault();
+  markX.classList.add("assigned");
+  markO.classList.remove("assigned");
+  initMark();
+});
+
 const GameBoard = (() => {
   let gameboard = [
     [1, 2, 3],
@@ -19,7 +44,7 @@ const GameBoard = (() => {
   };
 
   const setChar = (x, y, val) => {
-    gameboard[x][y].push(val);
+    gameboard[x][y] = val;
   };
 
   return {
@@ -28,3 +53,17 @@ const GameBoard = (() => {
     setChar,
   };
 })();
+
+gameBox.forEach((box) => {
+  box.addEventListener("click", () => {
+    let x = box.dataset.x;
+    let y = box.dataset.y;
+
+    if (box.textContent === "") {
+      box.textContent = userMark;
+      console.log(GameBoard.setChar(x, y, userMark));
+    } else {
+      console.log("Box filled");
+    }
+  });
+});
