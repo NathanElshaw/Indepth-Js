@@ -36,7 +36,7 @@ const GameBoard = (() => {
   ];
 
   const clearGameboard = () => {
-    gameboard = [
+    GameBoard.gameboard = [
       [1, 2, 3],
       [4, 5, 6],
       [7, 8, 9],
@@ -44,7 +44,7 @@ const GameBoard = (() => {
   };
 
   const setChar = (x, y, val) => {
-    gameboard[x][y] = val;
+    GameBoard.gameboard[x][y] = val;
   };
 
   return {
@@ -61,9 +61,16 @@ gameBox.forEach((box) => {
 
     if (box.textContent === "") {
       box.textContent = userMark;
-      console.log(GameBoard.setChar(x, y, userMark));
+      GameBoard.setChar(x, y, userMark);
     } else {
       console.log("Box filled");
     }
+  });
+});
+
+log.addEventListener("click", () => {
+  GameBoard.clearGameboard();
+  gameBox.forEach((box) => {
+    box.textContent = "";
   });
 });
