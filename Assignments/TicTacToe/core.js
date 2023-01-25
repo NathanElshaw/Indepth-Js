@@ -11,6 +11,7 @@ let playerOne = "";
 let playerTwo = "";
 let currentPlayer = "";
 mode.value = "easy";
+let playerAi = "";
 
 computer.addEventListener("click", (event) => {
   event.preventDefault();
@@ -37,6 +38,17 @@ mode.addEventListener("change", () => {
     console.log("Hard");
   }
 });
+
+const ai = (() => {
+  let aiSkill = mode.value;
+
+  let aiMark = playerTwo;
+
+  return {
+    aiSkill,
+    aiMark,
+  };
+})();
 
 const GameBoard = (() => {
   let gameboard = [
