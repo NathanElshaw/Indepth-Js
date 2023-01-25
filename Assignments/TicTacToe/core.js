@@ -47,10 +47,64 @@ const GameBoard = (() => {
     GameBoard.gameboard[x][y] = val;
   };
 
+  const gameWinCheck = (mark) => {
+    if (
+      GameBoard.gameboard[0][0] === mark &&
+      GameBoard.gameboard[0][1] === mark &&
+      GameBoard.gameboard[0][2] === mark
+    ) {
+      console.log("win 1st row");
+    } else if (
+      GameBoard.gameboard[1][0] === mark &&
+      GameBoard.gameboard[1][1] === mark &&
+      GameBoard.gameboard[1][2] === mark
+    ) {
+      console.log("win 2nd row");
+    } else if (
+      GameBoard.gameboard[2][0] === mark &&
+      GameBoard.gameboard[2][1] === mark &&
+      GameBoard.gameboard[2][2] === mark
+    ) {
+      console.log("win 3rd Row");
+    } else if (
+      GameBoard.gameboard[0][0] === mark &&
+      GameBoard.gameboard[1][0] === mark &&
+      GameBoard.gameboard[2][0] === mark
+    ) {
+      console.log("1st col win");
+    } else if (
+      GameBoard.gameboard[0][1] === mark &&
+      GameBoard.gameboard[1][1] === mark &&
+      GameBoard.gameboard[2][1] === mark
+    ) {
+      console.log("2nd col win");
+    } else if (
+      GameBoard.gameboard[0][2] === mark &&
+      GameBoard.gameboard[1][2] === mark &&
+      GameBoard.gameboard[2][2] === mark
+    ) {
+      console.log("3rd col win");
+    } else if (
+      GameBoard.gameboard[0][0] === mark &&
+      GameBoard.gameboard[1][1] === mark &&
+      GameBoard.gameboard[2][2] === mark
+    ) {
+      console.log("horz 1 win");
+    } else if (
+      GameBoard.gameboard[0][2] === mark &&
+      GameBoard.gameboard[1][1] === mark &&
+      GameBoard.gameboard[2][0] === mark
+    ) {
+    } else {
+      console.log("no winner");
+    }
+  };
+
   return {
     gameboard,
     clearGameboard,
     setChar,
+    gameWinCheck,
   };
 })();
 
@@ -62,6 +116,7 @@ gameBox.forEach((box) => {
     if (box.textContent === "") {
       box.textContent = userMark;
       GameBoard.setChar(x, y, userMark);
+      GameBoard.gameWinCheck(userMark);
     } else {
       console.log("Box filled");
     }
@@ -69,8 +124,5 @@ gameBox.forEach((box) => {
 });
 
 log.addEventListener("click", () => {
-  GameBoard.clearGameboard();
-  gameBox.forEach((box) => {
-    box.textContent = "";
-  });
+  console.log(GameBoard.gameWinCheck(userMark));
 });
