@@ -13,8 +13,14 @@
     <div><h1>Tic-Tac-Toe</h1></div>
     <div>
       <form action="">
-        <label for="difficultySelect">Select Difficulty:</label>
-        <select id="difficultySelect">
+        <div class="switch">
+          <button id="local" class="assigned">2 Players</button>
+          <button id="playAi">Computer</button>
+        </div>
+        <label id="difficultySelect" for="difficultySelect" class="hidden"
+          >Select Difficulty:</label
+        >
+        <select class="hidden" id="difficultySelector">
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>

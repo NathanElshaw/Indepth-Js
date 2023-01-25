@@ -14,10 +14,15 @@ form {
   display: flex;
   justify-content: center;
   gap: 1em;
+  margin-bottom: 1em;
 }
 
 .assigned {
   background-color: darkgray;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 #markX,

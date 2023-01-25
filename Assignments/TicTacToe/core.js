@@ -2,10 +2,30 @@ const gameBox = document.querySelectorAll("#gameBox");
 const markX = document.querySelector("#markX");
 const markO = document.querySelector("#markO");
 const log = document.querySelector("#log");
+const local = document.querySelector("#local");
+const computer = document.querySelector("#playAi");
+const diff = document.querySelector("#difficultySelect");
+const mode = document.querySelector("#difficultySelector");
 
 let playerOne = "";
 let playerTwo = "";
 let currentPlayer = "";
+
+computer.addEventListener("click", (event) => {
+  event.preventDefault();
+  computer.classList.add("assigned");
+  local.classList.remove("assigned");
+  diff.classList.remove("hidden");
+  mode.classList.remove("hidden");
+});
+
+local.addEventListener("click", (event) => {
+  event.preventDefault();
+  local.classList.add("assigned");
+  computer.classList.remove("assigned");
+  diff.classList.add("hidden");
+  mode.classList.add("hidden");
+});
 
 const GameBoard = (() => {
   let gameboard = [
@@ -74,7 +94,7 @@ const GameBoard = (() => {
       GameBoard.gameboard[1][1] === mark &&
       GameBoard.gameboard[2][0] === mark
     ) {
-      console.log("horz 2 win");
+      console.log(`${currentPlayer} wins!`);
     } else {
       console.log("no winner");
     }
