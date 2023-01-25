@@ -10,6 +10,7 @@ const mode = document.querySelector("#difficultySelector");
 let playerOne = "";
 let playerTwo = "";
 let currentPlayer = "";
+mode.value = "easy";
 
 computer.addEventListener("click", (event) => {
   event.preventDefault();
@@ -25,6 +26,16 @@ local.addEventListener("click", (event) => {
   computer.classList.remove("assigned");
   diff.classList.add("hidden");
   mode.classList.add("hidden");
+});
+
+mode.addEventListener("change", () => {
+  if (mode.value === "easy") {
+    console.log("Easy");
+  } else if (mode.value === "medium") {
+    console.log("Medium");
+  } else if (mode.value === "hard") {
+    console.log("Hard");
+  }
 });
 
 const GameBoard = (() => {
