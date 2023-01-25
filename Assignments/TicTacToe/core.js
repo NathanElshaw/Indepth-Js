@@ -3,30 +3,9 @@ const markX = document.querySelector("#markX");
 const markO = document.querySelector("#markO");
 const log = document.querySelector("#log");
 
-let userMark = "";
-
-function initMark() {
-  if (markX.className === "assigned") {
-    userMark = "X";
-  } else if (markO.className === "assigned") {
-    userMark = "O";
-  }
-}
-
-initMark();
-
-markO.addEventListener("click", (event) => {
-  event.preventDefault();
-  markO.classList.add("assigned");
-  markX.classList.remove("assigned");
-  initMark();
-});
-markX.addEventListener("click", (event) => {
-  event.preventDefault();
-  markX.classList.add("assigned");
-  markO.classList.remove("assigned");
-  initMark();
-});
+let playerOne = "";
+let playerTwo = "";
+let currentPlayer = "";
 
 const GameBoard = (() => {
   let gameboard = [
@@ -95,6 +74,7 @@ const GameBoard = (() => {
       GameBoard.gameboard[1][1] === mark &&
       GameBoard.gameboard[2][0] === mark
     ) {
+      console.log("horz 2 win");
     } else {
       console.log("no winner");
     }
@@ -108,15 +88,52 @@ const GameBoard = (() => {
   };
 })();
 
+function initMark() {
+  if (markX.className === "assigned") {
+    playerOne = "X";
+    playerTwo = "O";
+    currentPlayer = playerOne;
+    GameBoard.clearGameboard();
+  } else if (markO.className === "assigned") {
+    playerOne = "O";
+    playerTwo = "X";
+    currentPlayer = playerTwo;
+    GameBoard.clearGameboard();
+  }
+}
+
+initMark();
+
+markO.addEventListener("click", (event) => {
+  event.preventDefault();
+  markO.classList.add("assigned");
+  markX.classList.remove("assigned");
+  initMark();
+});
+markX.addEventListener("click", (event) => {
+  event.preventDefault();
+  markX.classList.add("assigned");
+  markO.classList.remove("assigned");
+  initMark();
+});
+
 gameBox.forEach((box) => {
   box.addEventListener("click", () => {
     let x = box.dataset.x;
     let y = box.dataset.y;
 
     if (box.textContent === "") {
-      box.textContent = userMark;
-      GameBoard.setChar(x, y, userMark);
-      GameBoard.gameWinCheck(userMark);
+      if (currentPlayer === playerOne) {
+        box.textContent = playerOne;
+        GameBoard.setChar(x, y, playerOne);
+        GameBoard.gameWinCheck(playerOne);
+        currentPlayer = playerTwo;
+      } else if (currentPlayer === playerTwo) {
+        box.textContent = playerTwo;
+        GameBoard.setChar(x, y, playerTwo);
+        GameBoard.gameWinCheck(playerTwo);
+        currentPlayer = playerOne;
+      }
     } else {
       console.log("Box filled");
     }
@@ -124,5 +141,5 @@ gameBox.forEach((box) => {
 });
 
 log.addEventListener("click", () => {
-  console.log(GameBoard.gameWinCheck(userMark));
+  console.log(GameBoard.gameWinCheck(playerOne));
 });
