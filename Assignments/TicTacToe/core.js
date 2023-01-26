@@ -13,49 +13,31 @@ let currentPlayer = "";
 mode.value = "easy";
 let playerAi = "";
 
-computer.addEventListener("click", (event) => {
-  event.preventDefault();
-  computer.classList.add("assigned");
-  local.classList.remove("assigned");
-  diff.classList.remove("hidden");
-  mode.classList.remove("hidden");
-});
-
-local.addEventListener("click", (event) => {
-  event.preventDefault();
-  local.classList.add("assigned");
-  computer.classList.remove("assigned");
-  diff.classList.add("hidden");
-  mode.classList.add("hidden");
-});
-
-mode.addEventListener("change", () => {
-  if (mode.value === "easy") {
-    console.log("Easy");
-  } else if (mode.value === "medium") {
-    console.log("Medium");
-  } else if (mode.value === "hard") {
-    console.log("Hard");
-  }
-});
-
-const ai = (() => {
-  let aiSkill = mode.value;
-
-  let aiMark = playerTwo;
-
-  return {
-    aiSkill,
-    aiMark,
-  };
-})();
-
 const GameBoard = (() => {
   let gameboard = [
     [1, 2, 3],
     [4, 5, 6],
     [7, 8, 9],
   ];
+
+  let aiGameBoard = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+  ];
+
+  const updateAi = (x, num) => {
+    let index = parseInt(num);
+    console.log(typeof index);
+    index++;
+    console.log(index);
+    let y = GameBoard.aiGameBoard[x].indexOf(index);
+    GameBoard.aiGameBoard[x].splice(y, 1);
+    if (GameBoard.aiGameBoard[x].length === 0) {
+      console.log("Clear Ai row");
+      GameBoard.aiGameBoard.splice([x], 1);
+    }
+  };
 
   const clearGameboard = () => {
     GameBoard.gameboard = [
@@ -125,9 +107,33 @@ const GameBoard = (() => {
 
   return {
     gameboard,
+    aiGameBoard,
+    updateAi,
     clearGameboard,
     setChar,
     gameWinCheck,
+  };
+})();
+
+const ai = (() => {
+  let skill = mode.value;
+
+  let mark = playerTwo;
+
+  const Turn = () => {
+    if (ai.skill === "easy") {
+      let x = Math.floor(
+        Math.random() * (GameBoard.aiGameBoard.length - 0) + 0
+      );
+      let y = Math.floor(Math.random());
+    } else if (ai.skill === "medium") {
+    } else if (ai.skill === "hard") {
+    }
+  };
+
+  return {
+    skill,
+    mark,
   };
 })();
 
@@ -146,6 +152,33 @@ function initMark() {
 }
 
 initMark();
+
+computer.addEventListener("click", (event) => {
+  event.preventDefault();
+  computer.classList.add("assigned");
+  local.classList.remove("assigned");
+  diff.classList.remove("hidden");
+  mode.classList.remove("hidden");
+  playerAi = ai;
+});
+
+local.addEventListener("click", (event) => {
+  event.preventDefault();
+  local.classList.add("assigned");
+  computer.classList.remove("assigned");
+  diff.classList.add("hidden");
+  mode.classList.add("hidden");
+});
+
+mode.addEventListener("change", () => {
+  if (mode.value === "easy") {
+    console.log("Easy");
+  } else if (mode.value === "medium") {
+    console.log("Medium");
+  } else if (mode.value === "hard") {
+    console.log("Hard");
+  }
+});
 
 markO.addEventListener("click", (event) => {
   event.preventDefault();
@@ -169,11 +202,13 @@ gameBox.forEach((box) => {
       if (currentPlayer === playerOne) {
         box.textContent = playerOne;
         GameBoard.setChar(x, y, playerOne);
+        GameBoard.updateAi(x, y);
         GameBoard.gameWinCheck(playerOne);
         currentPlayer = playerTwo;
       } else if (currentPlayer === playerTwo) {
         box.textContent = playerTwo;
         GameBoard.setChar(x, y, playerTwo);
+        GameBoard.updateAi(x, y);
         GameBoard.gameWinCheck(playerTwo);
         currentPlayer = playerOne;
       }
@@ -184,5 +219,5 @@ gameBox.forEach((box) => {
 });
 
 log.addEventListener("click", () => {
-  console.log(GameBoard.gameWinCheck(playerOne));
+  console.log();
 });
