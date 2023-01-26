@@ -121,11 +121,16 @@ const ai = (() => {
   let mark = playerTwo;
 
   const Turn = () => {
+    console.log("called");
     if (ai.skill === "easy") {
+      console.log("called first if");
       let x = Math.floor(
         Math.random() * (GameBoard.aiGameBoard.length - 0) + 0
       );
-      let y = Math.floor(Math.random());
+      let min = GameBoard.aiGameBoard[x][0];
+      let max = GameBoard.aiGameBoard[x][GameBoard.aiGameBoard.length - 1];
+      let y = Math.floor(Math.random() * (max - min) + min);
+      GameBoard.setChar(x, y, mark);
     } else if (ai.skill === "medium") {
     } else if (ai.skill === "hard") {
     }
@@ -134,6 +139,7 @@ const ai = (() => {
   return {
     skill,
     mark,
+    Turn,
   };
 })();
 
@@ -219,5 +225,5 @@ gameBox.forEach((box) => {
 });
 
 log.addEventListener("click", () => {
-  console.log();
+  ai.Turn();
 });
