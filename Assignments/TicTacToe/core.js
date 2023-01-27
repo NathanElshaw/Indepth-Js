@@ -132,6 +132,8 @@ function initMark() {
 initMark();
 
 const ai = (() => {
+  let isActive = true;
+
   let skill = mode.value;
 
   let mark = playerTwo;
@@ -145,6 +147,7 @@ const ai = (() => {
       let min = GameBoard.aiGameBoard[x][0];
       let max = GameBoard.aiGameBoard[x][GameBoard.aiGameBoard.length - 1];
       let y = Math.floor(Math.random() * (max - min) + min);
+      gameBox.item(y).textContent = ai.mark;
       console.log(x, y);
       y = GameBoard.gameboard[x].indexOf(y);
       console.log(y);
@@ -156,6 +159,7 @@ const ai = (() => {
 
   return {
     skill,
+    isActive,
     mark,
     Turn,
   };
@@ -212,7 +216,11 @@ gameBox.forEach((box) => {
         GameBoard.setChar(x, y, playerOne);
         GameBoard.updateAi(x, y);
         GameBoard.gameWinCheck(playerOne);
-        currentPlayer = playerTwo;
+        if ((ai.isActive = true)) {
+          ai.Turn();
+        } else {
+          currentPlayer = playerTwo;
+        }
       } else if (currentPlayer === playerTwo) {
         box.textContent = playerTwo;
         GameBoard.setChar(x, y, playerTwo);
