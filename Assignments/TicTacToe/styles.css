@@ -50,3 +50,8 @@ form {
   align-items: center;
   justify-content: center;
 }
+
+#log {
+  margin-top: 1em;
+  padding: 1em 2em 1em 2em;
+}

@@ -12,6 +12,7 @@ let playerTwo = "";
 let currentPlayer = "";
 mode.value = "easy";
 let playerAi = "";
+let winner = "";
 
 const GameBoard = (() => {
   let gameboard = [
@@ -26,18 +27,18 @@ const GameBoard = (() => {
     [7, 8, 9],
   ];
 
-  const updateAi = (x, num) => {
-    let index = parseInt(num);
-    console.log(typeof index);
-    index++;
-    console.log(index);
-    let y = GameBoard.aiGameBoard[x].indexOf(index);
-    GameBoard.aiGameBoard[x].splice(y, 1);
-    if (GameBoard.aiGameBoard[x].length === 0) {
-      console.log("Clear Ai row");
-      GameBoard.aiGameBoard.splice([x], 1);
-    }
-  };
+  //const updateAi = (x, num) => {
+  //   let index = parseInt(num);
+  //   console.log(typeof index);
+  //   index++;
+  //   console.log(index, x);
+  //   let y = GameBoard.aiGameBoard[x].indexOf(index);
+  //   GameBoard.aiGameBoard[x].splice(y, 1);
+  //   if (GameBoard.aiGameBoard[x].length === 0) {
+  //     console.log("Clear Ai row");
+  //     GameBoard.aiGameBoard.splice([x], 1);
+  //   }
+  // };
 
   const clearGameboard = () => {
     GameBoard.gameboard = [
@@ -57,58 +58,57 @@ const GameBoard = (() => {
       GameBoard.gameboard[0][1] === mark &&
       GameBoard.gameboard[0][2] === mark
     ) {
-      console.log("win 1st row");
+      winner = mark;
     } else if (
       GameBoard.gameboard[1][0] === mark &&
       GameBoard.gameboard[1][1] === mark &&
       GameBoard.gameboard[1][2] === mark
     ) {
-      console.log("win 2nd row");
+      winner = mark;
     } else if (
       GameBoard.gameboard[2][0] === mark &&
       GameBoard.gameboard[2][1] === mark &&
       GameBoard.gameboard[2][2] === mark
     ) {
-      console.log("win 3rd Row");
+      winner = mark;
     } else if (
       GameBoard.gameboard[0][0] === mark &&
       GameBoard.gameboard[1][0] === mark &&
       GameBoard.gameboard[2][0] === mark
     ) {
-      console.log("1st col win");
+      winner = mark;
     } else if (
       GameBoard.gameboard[0][1] === mark &&
       GameBoard.gameboard[1][1] === mark &&
       GameBoard.gameboard[2][1] === mark
     ) {
-      console.log("2nd col win");
+      winner = mark;
     } else if (
       GameBoard.gameboard[0][2] === mark &&
       GameBoard.gameboard[1][2] === mark &&
       GameBoard.gameboard[2][2] === mark
     ) {
-      console.log("3rd col win");
+      winner = mark;
     } else if (
       GameBoard.gameboard[0][0] === mark &&
       GameBoard.gameboard[1][1] === mark &&
       GameBoard.gameboard[2][2] === mark
     ) {
-      console.log("horz 1 win");
+      winner = mark;
     } else if (
       GameBoard.gameboard[0][2] === mark &&
       GameBoard.gameboard[1][1] === mark &&
       GameBoard.gameboard[2][0] === mark
     ) {
-      console.log(`${currentPlayer} wins!`);
+      winner = mark;
     } else {
-      console.log("no winner");
     }
   };
 
   return {
     gameboard,
     aiGameBoard,
-    updateAi,
+    // updateAi,
     clearGameboard,
     setChar,
     gameWinCheck,
@@ -132,66 +132,59 @@ function initMark() {
 initMark();
 
 const ai = (() => {
-  let isActive = true;
+  let isActive = false;
 
   let skill = mode.value;
 
   let mark = playerTwo;
 
-  const Turn = () => {
-    console.log("called");
-    while (true) {
-      if (ai.skill === "easy") {
-        let x = Math.floor(
-          Math.random() * (GameBoard.aiGameBoard.length - 0) + 0
-        );
-        let testx = GameBoard.gameboard[x];
-        let min = 0;
-        let max = GameBoard.gameboard[x].length;
+  // const easyMove = () => {
+  //   while (true) {
+  //     if (winner !== "") {
+  //       break;
+  //     }
+  //     let x = Math.floor(
+  //       Math.random() * (GameBoard.aiGameBoard.length - 0) + 0
+  //     );
+  //     let min = 0;
+  //     let max = GameBoard.gameboard[x].length;
 
-        let y = Math.floor(Math.random() * (max - min) + min);
+  //     let y = Math.floor(Math.random() * (max - min) + min);
 
-        if (
-          gameBox.item(GameBoard.gameboard[x][y] - 1).textContent != "X" ||
-          "O"
-        ) {
-          let setter = gameBox.item(GameBoard.gameboard[x][y] - 1).textContent;
+  //     if (
+  //       gameBox.item(GameBoard.gameboard[x][y] - 1).textContent != "X" ||
+  //       "O"
+  //     ) {
+  //       if (gameBox.item(GameBoard.gameboard[x][y] - 1).textContent === "") {
+  //         gameBox.item(GameBoard.gameboard[x][y] - 1).textContent = ai.mark;
+  //         GameBoard.setChar(x, y, ai.mark);
+  //         console.log("set active");
 
-          if (gameBox.item(GameBoard.gameboard[x][y] - 1).textContent === "") {
-            console.log(
-              "x: ",
-              x,
-              "testx: ",
-              testx,
-              "Min: ",
-              min,
-              "Max: ",
-              max,
-              "Y:",
-              y,
-              "Setter: ",
-              setter
-            );
+  //         break;
+  //       }
+  //     }
+  //   }
+  // };
 
-            console.log(x, y);
-            gameBox.item(GameBoard.gameboard[x][y] - 1).textContent = ai.mark;
-            GameBoard.setChar(x, y, ai.mark);
-            console.log("set active");
-
-            break;
-          }
-        }
-      } else if (ai.skill === "medium") {
-      } else if (ai.skill === "hard") {
-      }
-    }
-  };
+  // const hardMove = () => {
+  //   while (true)
+  //     if (winner != "") {
+  //       break;
+  //     }
+  // };
+  // const Turn = () => {
+  //   if (ai.skill === "easy") {
+  //     easyMove();
+  //   } else if (ai.skill === "medium") {
+  //   } else if (ai.skill === "hard") {
+  //   }
+  // };
 
   return {
     skill,
     isActive,
     mark,
-    Turn,
+    // Turn,
   };
 })();
 
@@ -202,6 +195,7 @@ computer.addEventListener("click", (event) => {
   diff.classList.remove("hidden");
   mode.classList.remove("hidden");
   playerAi = ai;
+  ai.isActive = true;
 });
 
 local.addEventListener("click", (event) => {
@@ -210,16 +204,7 @@ local.addEventListener("click", (event) => {
   computer.classList.remove("assigned");
   diff.classList.add("hidden");
   mode.classList.add("hidden");
-});
-
-mode.addEventListener("change", () => {
-  if (mode.value === "easy") {
-    console.log("Easy");
-  } else if (mode.value === "medium") {
-    console.log("Medium");
-  } else if (mode.value === "hard") {
-    console.log("Hard");
-  }
+  ai.isActive = false;
 });
 
 markO.addEventListener("click", (event) => {
@@ -244,9 +229,9 @@ gameBox.forEach((box) => {
       if (currentPlayer === playerOne) {
         box.textContent = playerOne;
         GameBoard.setChar(x, y, playerOne);
-        GameBoard.updateAi(x, y);
+        // GameBoard.updateAi(x, y);
         GameBoard.gameWinCheck(playerOne);
-        if ((ai.isActive = true)) {
+        if (ai.isActive === true) {
           ai.Turn();
         } else {
           currentPlayer = playerTwo;
@@ -254,7 +239,7 @@ gameBox.forEach((box) => {
       } else if (currentPlayer === playerTwo) {
         box.textContent = playerTwo;
         GameBoard.setChar(x, y, playerTwo);
-        GameBoard.updateAi(x, y);
+        //GameBoard.updateAi(x, y);
         GameBoard.gameWinCheck(playerTwo);
         currentPlayer = playerOne;
       }
@@ -265,5 +250,8 @@ gameBox.forEach((box) => {
 });
 
 log.addEventListener("click", () => {
-  ai.Turn();
+  GameBoard.clearGameboard;
+  gameBox.forEach((box) => {
+    box.textContent = "";
+  });
 });
