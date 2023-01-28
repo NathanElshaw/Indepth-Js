@@ -140,20 +140,34 @@ const ai = (() => {
 
   const Turn = () => {
     console.log("called");
-    if (ai.skill === "easy") {
-      let x = Math.floor(
-        Math.random() * (GameBoard.aiGameBoard.length - 0) + 0
-      );
-      let min = GameBoard.aiGameBoard[x][0];
-      let max = GameBoard.aiGameBoard[x][GameBoard.aiGameBoard.length - 1];
-      let y = Math.floor(Math.random() * (max - min) + min);
-      gameBox.item(y).textContent = ai.mark;
-      console.log(x, y);
-      y = GameBoard.gameboard[x].indexOf(y);
-      console.log(y);
-      GameBoard.setChar(x, y, ai.mark);
-    } else if (ai.skill === "medium") {
-    } else if (ai.skill === "hard") {
+    while (true) {
+      if (ai.skill === "easy") {
+        let x = Math.floor(
+          Math.random() * (GameBoard.aiGameBoard.length - 0) + 0
+        );
+        let testx = GameBoard.gameboard[x];
+        let min = 0;
+        let max = GameBoard.gameboard[x].length - 1;
+        let y = Math.floor(Math.random() * (max - min) + min);
+        let setter = GameBoard.gameboard.indexOf(GameBoard.gameboard[x][y]);
+        console.log(
+          "x: ",
+          x,
+          "testx: ",
+          testx,
+          "Min: ",
+          min,
+          "Max: ",
+          max,
+          "Y:",
+          y,
+          "Setter: ",
+          setter
+        );
+        break;
+      } else if (ai.skill === "medium") {
+      } else if (ai.skill === "hard") {
+      }
     }
   };
 
