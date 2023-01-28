@@ -147,24 +147,40 @@ const ai = (() => {
         );
         let testx = GameBoard.gameboard[x];
         let min = 0;
-        let max = GameBoard.gameboard[x].length - 1;
+        let max = GameBoard.gameboard[x].length;
+
         let y = Math.floor(Math.random() * (max - min) + min);
-        let setter = GameBoard.gameboard.indexOf(GameBoard.gameboard[x][y]);
-        console.log(
-          "x: ",
-          x,
-          "testx: ",
-          testx,
-          "Min: ",
-          min,
-          "Max: ",
-          max,
-          "Y:",
-          y,
-          "Setter: ",
-          setter
-        );
-        break;
+
+        if (
+          gameBox.item(GameBoard.gameboard[x][y] - 1).textContent != "X" ||
+          "O"
+        ) {
+          let setter = gameBox.item(GameBoard.gameboard[x][y] - 1).textContent;
+
+          if (gameBox.item(GameBoard.gameboard[x][y] - 1).textContent === "") {
+            console.log(
+              "x: ",
+              x,
+              "testx: ",
+              testx,
+              "Min: ",
+              min,
+              "Max: ",
+              max,
+              "Y:",
+              y,
+              "Setter: ",
+              setter
+            );
+
+            console.log(x, y);
+            gameBox.item(GameBoard.gameboard[x][y] - 1).textContent = ai.mark;
+            GameBoard.setChar(x, y, ai.mark);
+            console.log("set active");
+
+            break;
+          }
+        }
       } else if (ai.skill === "medium") {
       } else if (ai.skill === "hard") {
       }
