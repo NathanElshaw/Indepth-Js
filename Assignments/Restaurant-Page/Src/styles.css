@@ -36,6 +36,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  align-content: center;
   text-align: center;
   background: url("./background.jpg");
   background-size: cover;
@@ -58,6 +59,9 @@ button {
   display: flex;
   justify-content: center;
   gap: 2em;
+}
+#cta > button {
+  margin-bottom: 2em;
 }
 
 .menuGrid {
@@ -87,6 +91,8 @@ button {
 
 .about {
   max-width: 20em;
+  margin: auto;
+  padding-bottom: 2em;
 }
 
 .footer {
