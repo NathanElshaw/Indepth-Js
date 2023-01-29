@@ -11,6 +11,7 @@ body {
   color: white;
   background-color: rgb(31, 28, 28);
   padding-bottom: 2em;
+  border-bottom: 1px solid white;
 }
 
 #header > h1 {
@@ -27,4 +28,36 @@ button {
   padding: 1em 2em 1em 2em;
   border-radius: 0;
   background-color: white;
+  cursor: pointer;
+}
+
+#contain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: url("./background.jpg");
+  background-size: cover;
+}
+
+#content {
+  background-color: rgba(22, 21, 21, 0.6);
+  border: 1px solid white;
+  color: white;
+  padding: 1em 2em;
+}
+
+#heroImg {
+  max-width: 16em;
+  max-height: 18em;
+  border-radius: 1em;
+}
+
+#cta {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+}
+
+#cta > button {
 }
