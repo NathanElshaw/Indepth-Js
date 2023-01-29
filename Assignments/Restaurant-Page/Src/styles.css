@@ -68,7 +68,8 @@ button {
 }
 
 .pizza {
-  padding: 0em 4em;
+  padding: 0em 2em;
+  max-width: 12em;
 }
 
 .pizza > img {
@@ -82,6 +83,10 @@ button {
 .pizza > button:hover {
   background-color: lightgray;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.about {
+  max-width: 20em;
 }
 
 .footer {
