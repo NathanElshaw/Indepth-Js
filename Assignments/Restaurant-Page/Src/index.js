@@ -23,7 +23,45 @@ homePage();
 
 function menuPage() {
   content.innerHTML = "";
-  content.textContent = "Menu";
+  content.innerHTML = `<h2>Menu</h2>
+  <div class="menuGrid">
+    <div class="pizza">
+      <img src="../Src/pizza.svg" alt="" />
+      <h3>Type</h3>
+      <p>disc</p>
+      <button>Order Now!</button>
+    </div>
+    <div class="pizza">
+      <img src="../Src/pizza.svg" alt="" />
+      <h3>Type</h3>
+      <p>disc</p>
+      <button>Order Now!</button>
+    </div>
+    <div class="pizza">
+      <img src="../Src/pizza.svg" alt="" />
+      <h3>Type</h3>
+      <p>disc</p>
+      <button>Order Now!</button>
+    </div>
+    <div class="pizza">
+      <img src="../Src/pizza.svg" alt="" />
+      <h3>Type</h3>
+      <p>disc</p>
+      <button>Order Now!</button>
+    </div>
+    <div class="pizza">
+      <img src="../Src/pizza.svg" alt="" />
+      <h3>Type</h3>
+      <p>disc</p>
+      <button>Order Now!</button>
+    </div>
+    <div class="pizza">
+      <img src="../Src/pizza.svg" alt="" />
+      <h3>Type</h3>
+      <p>disc</p>
+      <button>Order Now!</button>
+    </div>
+  </div>`;
 }
 
 function aboutPage() {
