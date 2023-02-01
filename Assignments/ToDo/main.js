@@ -17,8 +17,8 @@ const tasks = (title, desc, type, id) => {
   return Object.assign(Object.create(proto));
 };
 
-const displayTasks = (s) => [
-  {
+const displayTasks = (s) => {
+  const proto = {
     update() {
       displayList.push(s);
     },
@@ -35,8 +35,9 @@ const displayTasks = (s) => [
         }
       });
     },
-  },
-];
+  };
+  return Object.assign(Object.create(proto));
+};
 
 const removeList = (id) => {
   displayList.splice(displayList.indexOf(id), 1);
@@ -47,6 +48,6 @@ addTask.addEventListener("click", () => {
   displayTasks.update(
     tasks(taskTitle.value, taskDesc.value, taskType.value, id)
   );
-  displayTask.display();
+  displayTasks.display();
   id++;
 });
