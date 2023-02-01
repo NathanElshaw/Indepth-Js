@@ -17,6 +17,10 @@ const tasks = (title, desc, type, id) => {
   return Object.assign(Object.create(proto));
 };
 
+const removeList = (id) => {
+  console.log("clicked");
+};
+
 const displayTasks = (s) => {
   displayTask.innerHTML = "";
   displayList.push(s);
@@ -24,8 +28,8 @@ const displayTasks = (s) => {
     if (Object.getPrototypeOf(list).type === "task") {
       displayTask.innerHTML += `
       <h2>${list.title}</h2>
-      <p>${list.desc}</p
-      <button id=${list.id}>Delete</button>
+      <p>${list.desc}</p>
+      <button onClick={removeList(${list.id})}>Delete</button>
       `;
     }
   });
