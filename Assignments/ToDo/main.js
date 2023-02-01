@@ -17,25 +17,36 @@ const tasks = (title, desc, type, id) => {
   return Object.assign(Object.create(proto));
 };
 
-const removeList = (id) => {
-  console.log("clicked");
-};
+const displayTasks = (s) => [
+  {
+    update() {
+      displayList.push(s);
+    },
 
-const displayTasks = (s) => {
-  displayTask.innerHTML = "";
-  displayList.push(s);
-  displayList.forEach((list) => {
-    if (Object.getPrototypeOf(list).type === "task") {
-      displayTask.innerHTML += `
-      <h2>${list.title}</h2>
-      <p>${list.desc}</p>
-      <button onClick={removeList(${list.id})}>Delete</button>
-      `;
-    }
-  });
+    display() {
+      displayTask.innerHTML = "";
+      displayList.forEach((list) => {
+        if (Object.getPrototypeOf(list).type === "task") {
+          displayTask.innerHTML += `
+        <h2>${list.title}</h2>
+        <p>${list.desc}</p>
+        <button onClick={removeList(${list.id})}>Delete</button>
+        `;
+        }
+      });
+    },
+  },
+];
+
+const removeList = (id) => {
+  displayList.splice(displayList.indexOf(id), 1);
+  displayTasks.display();
 };
 
 addTask.addEventListener("click", () => {
-  displayTasks(tasks(taskTitle.value, taskDesc.value, taskType.value, id));
+  displayTasks.update(
+    tasks(taskTitle.value, taskDesc.value, taskType.value, id)
+  );
+  displayTask.display();
   id++;
 });
