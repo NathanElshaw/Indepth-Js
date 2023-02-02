@@ -17,13 +17,12 @@ const tasks = (title, desc, type, id) => {
   return Object.assign(Object.create(proto));
 };
 
-const displayTasks = (s) => {
+const displayTasks = (item) => {
   const proto = {
-    update() {
-      displayList.push(s);
+    update: () => {
+      displayList.push(item);
     },
-
-    display() {
+    display: () => {
       displayTask.innerHTML = "";
       displayList.forEach((list) => {
         if (Object.getPrototypeOf(list).type === "task") {
@@ -41,13 +40,13 @@ const displayTasks = (s) => {
 
 const removeList = (id) => {
   displayList.splice(displayList.indexOf(id), 1);
-  displayTasks.display();
+  displayTasks().display();
 };
 
 addTask.addEventListener("click", () => {
-  displayTasks.update(
+  displayTasks(
     tasks(taskTitle.value, taskDesc.value, taskType.value, id)
-  );
-  displayTasks.display();
+  ).update();
+  displayTasks().display();
   id++;
 });
