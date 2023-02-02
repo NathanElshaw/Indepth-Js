@@ -8,16 +8,26 @@
   </head>
   <body>
     <script src="./main.js" defer></script>
-    <label for="taskTitle">Title</label>
-    <input id="taskTitle" type="text" />
-    <label for="taskDesc">Description</label>
-    <input type="text" name="" id="taskDesc" />
-    <label for="type">Type of Task: </label>
-    <select name="type" id="type">
-      <option value="task">Task</option>
-      <option value="project">Project</option>
-    </select>
-    <button id="addTask">Add Tasks</button>
+    <form action="">
+      <label for="taskTitle">Title</label>
+      <input id="taskTitle" type="text" />
+      <label for="taskDesc">Description</label>
+      <input type="text" name="" id="taskDesc" />
+      <label for="taskPriority">Importance: </label>
+      <select name="taskPriority" id="taskPriority">
+        <option value="Not Very Imortant">Not Very Important</option>
+        <option value="Important">Important</option>
+        <option value="Very Important">Very Important</option>
+      </select>
+      <label for="taskDue">Due Date: </label>
+      <input type="date" id="taskDue" />
+      <label for="type">Type of Task: </label>
+      <select name="type" id="type">
+        <option value="task">Task</option>
+        <option value="project">Project</option>
+      </select>
+      <button id="addTask">Add Tasks</button>
+    </form>
     <div id="displayTasks"></div>
   </body>
 </html>

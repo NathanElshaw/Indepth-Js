@@ -1,5 +1,7 @@
 const displayTask = document.querySelector("#displayTasks");
 const taskTitle = document.querySelector("#taskTitle");
+const taskPriority = document.querySelector("#taskPriority");
+const taskDue = document.querySelector("#taskDue");
 const taskDesc = document.querySelector("#taskDesc");
 const taskType = document.querySelector("#type");
 const addTask = document.querySelector("#addTask");
@@ -7,10 +9,12 @@ const addTask = document.querySelector("#addTask");
 let displayList = [];
 let id = 0;
 
-const tasks = (title, desc, type, id) => {
+const tasks = (title, desc, priority, dueDate, type, id) => {
   const proto = {
     title: title,
     desc: desc,
+    priority: priority,
+    dueDate: dueDate,
     type: type,
     id: id,
   };
@@ -28,7 +32,9 @@ const displayTasks = (item) => {
         if (Object.getPrototypeOf(list).type === "task") {
           displayTask.innerHTML += `
         <h2>${list.title}</h2>
+        <p>Priority: ${list.priority}</p>
         <p>${list.desc}</p>
+        <p>Due Date: ${list.dueDate}
         <button onClick={removeList(${list.id})}>Delete</button>
         `;
         }
@@ -43,9 +49,17 @@ const removeList = (id) => {
   displayTasks().display();
 };
 
-addTask.addEventListener("click", () => {
+addTask.addEventListener("click", (event) => {
+  event.preventDefault();
   displayTasks(
-    tasks(taskTitle.value, taskDesc.value, taskType.value, id)
+    tasks(
+      taskTitle.value,
+      taskDesc.value,
+      taskPriority.value,
+      taskDue.value,
+      taskType.value,
+      id
+    )
   ).update();
   displayTasks().display();
   id++;
