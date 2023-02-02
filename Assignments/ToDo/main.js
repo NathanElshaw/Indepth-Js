@@ -1,4 +1,6 @@
+const displayParent = document.querySelector("#displayParent");
 const displayTask = document.querySelector("#displayTasks");
+
 const taskTitle = document.querySelector("#taskTitle");
 const taskPriority = document.querySelector("#taskPriority");
 const taskDue = document.querySelector("#taskDue");
@@ -6,6 +8,10 @@ const taskDesc = document.querySelector("#taskDesc");
 const taskType = document.querySelector("#type");
 const addTask = document.querySelector("#addTask");
 
+const projectName = document.querySelector("#newProject");
+const addProject = document.querySelector("#addProject");
+
+let projectList = ["Project 1"];
 let displayList = [];
 let id = 0;
 
@@ -63,4 +69,11 @@ addTask.addEventListener("click", (event) => {
   ).update();
   displayTasks().display();
   id++;
+});
+
+addProject.addEventListener("click", (event) => {
+  event.preventDefault();
+  console.log(projectList.indexOf(projectName.value));
+
+  taskType.innerHTML += `<option value=${projectName.value}>${projectName.value}</option>`;
 });

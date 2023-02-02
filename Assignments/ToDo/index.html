@@ -24,11 +24,19 @@
       <input type="date" id="taskDue" />
       <label for="type">Type of Task: </label>
       <select name="type" id="type">
-        <option value="task">Task</option>
-        <option value="project">Project</option>
+        <option value="project1">project 1</option>
       </select>
       <button id="addTask">Add Tasks</button>
     </form>
-    <div id="displayTasks"></div>
+    <form action="">
+      <label for="newProject">Project Name</label>
+      <input type="text" name="newProject" id="newProject" />
+      <button id="addProject">add project</button>
+    </form>
+    <div id="displayParent">
+      <div id="displayTasks">
+        <h1>Project 1</h1>
+      </div>
+    </div>
   </body>
 </html>
