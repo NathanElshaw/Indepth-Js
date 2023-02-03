@@ -51,6 +51,7 @@ const tasks = (title, discription, dueDate, importance, id, project) => {
       for (i = 0; i < list.length; i++) {
         let task = list[i].tasks;
         displayParent.innerHTML = "";
+        displayParent.innerHTML = `<h1>${list[i].title}</h1>`;
         task.map((tasks) => {
           displayParent.innerHTML += `
           <div>
@@ -79,3 +80,5 @@ addTask.addEventListener("click", (event) => {
   ).listAdd();
   tasks().display();
 });
+
+tasks().display();
