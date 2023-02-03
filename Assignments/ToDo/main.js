@@ -1,5 +1,4 @@
 const displayParent = document.querySelector("#displayParent");
-const displayTask = document.querySelector("#displayTasks");
 
 const taskTitle = document.querySelector("#taskTitle");
 const taskPriority = document.querySelector("#taskPriority");
@@ -11,69 +10,56 @@ const addTask = document.querySelector("#addTask");
 const projectName = document.querySelector("#newProject");
 const addProject = document.querySelector("#addProject");
 
-let projectList = ["Project 1"];
-let displayList = [];
-let id = 0;
+let list = [
+  {
+    title: "Project 1",
+    tasks: [
+      {
+        title: "default",
+        discription: "some text",
+        dueDate: "Soon",
+        importance: "Very Important",
+      },
+    ],
+  },
+];
+let id = 1;
 
-const tasks = (title, desc, priority, dueDate, type, id) => {
+const tasks = (title, discription, dueDate, importance, id, project) => {
   const proto = {
     title: title,
-    desc: desc,
-    priority: priority,
+    discription: discription,
     dueDate: dueDate,
-    type: type,
+    importance: importance,
     id: id,
-  };
-  return Object.assign(Object.create(proto));
-};
+    project: project,
 
-const displayTasks = (item) => {
-  const proto = {
-    update: () => {
-      displayList.push(item);
-    },
-    display: () => {
-      displayTask.innerHTML = "";
-      displayList.forEach((list) => {
-        if (Object.getPrototypeOf(list).type === "task") {
-          displayTask.innerHTML += `
-        <h2>${list.title}</h2>
-        <p>Priority: ${list.priority}</p>
-        <p>${list.desc}</p>
-        <p>Due Date: ${list.dueDate}
-        <button onClick={removeList(${list.id})}>Delete</button>
-        `;
+    listAdd: () => {
+      for (i = 0; i < list.length; i++) {
+        console.log("listadd");
+        if (list[i].title === project) {
+          console.log("phase 2");
+          list[i].tasks.push({
+            title,
+            discription,
+            dueDate,
+            importance,
+          });
         }
-      });
+      }
     },
   };
   return Object.assign(Object.create(proto));
-};
-
-const removeList = (id) => {
-  displayList.splice(displayList.indexOf(id), 1);
-  displayTasks().display();
 };
 
 addTask.addEventListener("click", (event) => {
   event.preventDefault();
-  displayTasks(
-    tasks(
-      taskTitle.value,
-      taskDesc.value,
-      taskPriority.value,
-      taskDue.value,
-      taskType.value,
-      id
-    )
-  ).update();
-  displayTasks().display();
-  id++;
-});
-
-addProject.addEventListener("click", (event) => {
-  event.preventDefault();
-  console.log(projectList.indexOf(projectName.value));
-
-  taskType.innerHTML += `<option value=${projectName.value}>${projectName.value}</option>`;
+  tasks(
+    taskTitle.value,
+    taskDesc.value,
+    taskDue.value,
+    taskPriority.value,
+    id,
+    taskType.value
+  ).listAdd();
 });
