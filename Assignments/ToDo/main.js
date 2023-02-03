@@ -36,9 +36,7 @@ const tasks = (title, discription, dueDate, importance, id, project) => {
 
     listAdd: () => {
       for (i = 0; i < list.length; i++) {
-        console.log("listadd");
         if (list[i].title === project) {
-          console.log("phase 2");
           list[i].tasks.push({
             title,
             discription,
@@ -46,6 +44,23 @@ const tasks = (title, discription, dueDate, importance, id, project) => {
             importance,
           });
         }
+      }
+    },
+
+    display: () => {
+      for (i = 0; i < list.length; i++) {
+        let task = list[i].tasks;
+        displayParent.innerHTML = "";
+        task.map((tasks) => {
+          displayParent.innerHTML += `
+          <div>
+            <h2>${tasks.title}</h2>
+            <p>${tasks.discription}</p>
+            <p>Due Date: ${tasks.dueDate}</p>
+            <p>Importance: ${tasks.importance}</p>
+          </div> 
+          `;
+        });
       }
     },
   };
@@ -62,4 +77,5 @@ addTask.addEventListener("click", (event) => {
     id,
     taskType.value
   ).listAdd();
+  tasks().display();
 });
