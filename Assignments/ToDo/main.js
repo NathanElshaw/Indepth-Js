@@ -10,8 +10,6 @@ const addTask = document.querySelector("#addTask");
 const projectName = document.querySelector("#newProject");
 const addProject = document.querySelector("#addProject");
 
-let projectTitle = "";
-let ejectProject = "";
 let list = [
   {
     title: "Project 1",
@@ -79,7 +77,6 @@ const tasks = (title, discription, dueDate, importance, id, project) => {
       for (i = 0; i < list.length; i++) {
         let task = list[i].tasks;
         displayParent.innerHTML += `<h1>${list[i].title}</h1><button id="project" value="${list[i].title}">Remove</button>`;
-        ejectProject = document.querySelectorAll("#project");
         task.map((tasks) => {
           displayParent.innerHTML += `
           <div>
@@ -87,16 +84,12 @@ const tasks = (title, discription, dueDate, importance, id, project) => {
             <p>${tasks.discription}</p>
             <p>Due Date: ${tasks.dueDate}</p>
             <p>Importance: ${tasks.importance}</p>
+            <button>Remove Task</button>
           </div> 
           `;
         });
       }
-      ejectProject.forEach((remove) => {
-        remove.addEventListener("click", () => {
-          projects().removeProject(remove.value);
-          console.log(list);
-        });
-      });
+      ejectProject = document.querySelectorAll("#project");
     },
   };
   return Object.assign(Object.create(proto));
@@ -120,3 +113,17 @@ addProject.addEventListener("click", (event) => {
   projects().addProject(projectName.value);
 });
 tasks().display();
+
+if (ejectProject.length <= 2) {
+  ejectProject.forEach((remove) => {
+    remove.addEventListener("click", () => {
+      projects().removeProject(remove.value);
+      console.log(list);
+    });
+  });
+} else {
+  ejectProject.addEventListener("click", () => {
+    projects().removeProject(ejectProject.value);
+    console.log(list);
+  });
+}
