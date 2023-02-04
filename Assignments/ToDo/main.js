@@ -75,8 +75,7 @@ const tasks = (title, discription, dueDate, importance, id, project) => {
       displayParent.innerHTML = "";
       for (i = 0; i < list.length; i++) {
         let task = list[i].tasks;
-        displayParent.innerHTML += `<h1 id="projectName" value="${list[i].title}">${list[i].title}</h1><button id="project">Remove</button>`;
-        projectTitle = document.querySelectorAll("#projectName");
+        displayParent.innerHTML += `<h1>${list[i].title}</h1><button id="project" value="${list[i].title}">Remove</button>`;
         ejectProject = document.querySelectorAll("#project");
         task.map((tasks) => {
           displayParent.innerHTML += `
@@ -113,8 +112,11 @@ addProject.addEventListener("click", (event) => {
 tasks().display();
 
 ejectProject.forEach((remove) => {
-  remove.addEventListener("click", (event) => {
-    event.preventDefault();
-    console.log(projectName.innerHTML);
+  remove.addEventListener("click", () => {
+    console.log(remove.value);
   });
+});
+
+ejectProject.addEventListener("click", () => {
+  console.log("click", ejectProject.value);
 });
