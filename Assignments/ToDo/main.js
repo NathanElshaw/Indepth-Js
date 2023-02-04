@@ -72,6 +72,19 @@ const tasks = (title, discription, dueDate, importance, id, project) => {
       }
     },
 
+    listRemove: (project, task) => {
+      console.log("called", project, task);
+      for (i = 0; i < list.length; i++) {
+        if (list[i].title === project) {
+          for (n = 0; n < list[i].tasks.length; n++) {
+            if ((list[i].tasks[n].title = task)) {
+              console.log("found");
+            }
+          }
+        }
+      }
+    },
+
     display: () => {
       displayParent.innerHTML = "";
       for (i = 0; i < list.length; i++) {
@@ -80,16 +93,18 @@ const tasks = (title, discription, dueDate, importance, id, project) => {
         task.map((tasks) => {
           displayParent.innerHTML += `
           <div>
-            <h2>${tasks.title}</h2>
+            <h2 id="projectHeader" value="${tasks.title}">${tasks.title}</h2>
             <p>${tasks.discription}</p>
             <p>Due Date: ${tasks.dueDate}</p>
             <p>Importance: ${tasks.importance}</p>
-            <button>Remove Task</button>
+            <button id="removeTask" value="${tasks.title}">Remove Task</button>
           </div> 
           `;
         });
       }
+      tasksTitle = document.querySelectorAll("#projectHeader");
       ejectProject = document.querySelectorAll("#project");
+      removeTask = document.querySelectorAll("#removeTask");
     },
   };
   return Object.assign(Object.create(proto));
@@ -114,16 +129,17 @@ addProject.addEventListener("click", (event) => {
 });
 tasks().display();
 
-if (ejectProject.length <= 2) {
-  ejectProject.forEach((remove) => {
-    remove.addEventListener("click", () => {
-      projects().removeProject(remove.value);
-      console.log(list);
-    });
-  });
-} else {
-  ejectProject.addEventListener("click", () => {
-    projects().removeProject(ejectProject.value);
+ejectProject.forEach((remove) => {
+  remove.addEventListener("click", (event) => {
+    event.preventDefault();
+    projects().removeProject(remove.value);
     console.log(list);
   });
-}
+});
+
+removeTask.forEach((remove) => {
+  remove.addEventListener("click", (event) => {
+    event.preventDefault();
+    tasks().listRemove(this.tasksTitle.value, remove.value);
+  });
+});
