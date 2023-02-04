@@ -24,6 +24,10 @@ let list = [
       },
     ],
   },
+  {
+    title: "Project 2",
+    tasks: [],
+  },
 ];
 let id = 1;
 
@@ -41,9 +45,10 @@ const projects = (title) => {
     removeProject: (project) => {
       for (i = 0; i < list.length; i++) {
         if (list[i].title === project) {
-          list.splice([i], 0);
+          list.splice([i], 1);
         }
       }
+      tasks().display();
     },
   };
   return Object.assign(Object.create(proto));
@@ -88,6 +93,12 @@ const tasks = (title, discription, dueDate, importance, id, project) => {
           `;
         });
       }
+      ejectProject.forEach((remove) => {
+        remove.addEventListener("click", () => {
+          projects().removeProject(remove.value);
+          console.log(list);
+        });
+      });
     },
   };
   return Object.assign(Object.create(proto));
@@ -110,13 +121,3 @@ addProject.addEventListener("click", (event) => {
   event.preventDefault();
 });
 tasks().display();
-
-ejectProject.forEach((remove) => {
-  remove.addEventListener("click", () => {
-    console.log(remove.value);
-  });
-});
-
-ejectProject.addEventListener("click", () => {
-  console.log("click", ejectProject.value);
-});
