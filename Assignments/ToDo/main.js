@@ -10,6 +10,8 @@ const addTask = document.querySelector("#addTask");
 const projectName = document.querySelector("#newProject");
 const addProject = document.querySelector("#addProject");
 
+let projectTitle = "";
+let ejectProject = "";
 let list = [
   {
     title: "Project 1",
@@ -35,7 +37,16 @@ const projects = (title) => {
         tasks: [],
       });
     },
+
+    removeProject: (project) => {
+      for (i = 0; i < list.length; i++) {
+        if (list[i].title === project) {
+          list.splice([i], 0);
+        }
+      }
+    },
   };
+  return Object.assign(Object.create(proto));
 };
 
 const tasks = (title, discription, dueDate, importance, id, project) => {
@@ -64,7 +75,9 @@ const tasks = (title, discription, dueDate, importance, id, project) => {
       displayParent.innerHTML = "";
       for (i = 0; i < list.length; i++) {
         let task = list[i].tasks;
-        displayParent.innerHTML += `<h1>${list[i].title}</h1>`;
+        displayParent.innerHTML += `<h1 id="projectName" value="${list[i].title}">${list[i].title}</h1><button id="project">Remove</button>`;
+        projectTitle = document.querySelectorAll("#projectName");
+        ejectProject = document.querySelectorAll("#project");
         task.map((tasks) => {
           displayParent.innerHTML += `
           <div>
@@ -98,3 +111,10 @@ addProject.addEventListener("click", (event) => {
   event.preventDefault();
 });
 tasks().display();
+
+ejectProject.forEach((remove) => {
+  remove.addEventListener("click", (event) => {
+    event.preventDefault();
+    console.log(projectName.innerHTML);
+  });
+});
