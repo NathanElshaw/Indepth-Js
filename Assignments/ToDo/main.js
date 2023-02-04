@@ -25,6 +25,19 @@ let list = [
 ];
 let id = 1;
 
+const projects = (title) => {
+  const proto = {
+    title: title,
+
+    addProject: () => {
+      list.push({
+        title: title,
+        tasks: [],
+      });
+    },
+  };
+};
+
 const tasks = (title, discription, dueDate, importance, id, project) => {
   const proto = {
     title: title,
@@ -48,10 +61,10 @@ const tasks = (title, discription, dueDate, importance, id, project) => {
     },
 
     display: () => {
+      displayParent.innerHTML = "";
       for (i = 0; i < list.length; i++) {
         let task = list[i].tasks;
-        displayParent.innerHTML = "";
-        displayParent.innerHTML = `<h1>${list[i].title}</h1>`;
+        displayParent.innerHTML += `<h1>${list[i].title}</h1>`;
         task.map((tasks) => {
           displayParent.innerHTML += `
           <div>
@@ -81,4 +94,7 @@ addTask.addEventListener("click", (event) => {
   tasks().display();
 });
 
+addProject.addEventListener("click", (event) => {
+  event.preventDefault();
+});
 tasks().display();
