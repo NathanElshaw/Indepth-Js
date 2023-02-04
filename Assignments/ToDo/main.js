@@ -72,14 +72,13 @@ const tasks = (title, discription, dueDate, importance, id, project) => {
       }
     },
 
-    listRemove: (project, task) => {
-      console.log("called", project, task);
+    listRemove: (task) => {
       for (i = 0; i < list.length; i++) {
-        if (list[i].title === project) {
-          for (n = 0; n < list[i].tasks.length; n++) {
-            if ((list[i].tasks[n].title = task)) {
-              console.log("found");
-            }
+        for (n = 0; n < list[i].tasks.length; n++) {
+          if ((list[i].tasks[n].title = task)) {
+            list[i].tasks.splice([n], 1);
+            tasks().display();
+            break;
           }
         }
       }
@@ -89,11 +88,11 @@ const tasks = (title, discription, dueDate, importance, id, project) => {
       displayParent.innerHTML = "";
       for (i = 0; i < list.length; i++) {
         let task = list[i].tasks;
-        displayParent.innerHTML += `<h1>${list[i].title}</h1><button id="project" value="${list[i].title}">Remove</button>`;
+        displayParent.innerHTML += `<h1 id="projectHeader" value="${tasks.title}">${list[i].title}</h1><button id="project" value="${list[i].title}">Remove</button>`;
         task.map((tasks) => {
           displayParent.innerHTML += `
           <div>
-            <h2 id="projectHeader" value="${tasks.title}">${tasks.title}</h2>
+            <h2>${tasks.title}</h2>
             <p>${tasks.discription}</p>
             <p>Due Date: ${tasks.dueDate}</p>
             <p>Importance: ${tasks.importance}</p>
@@ -105,6 +104,19 @@ const tasks = (title, discription, dueDate, importance, id, project) => {
       tasksTitle = document.querySelectorAll("#projectHeader");
       ejectProject = document.querySelectorAll("#project");
       removeTask = document.querySelectorAll("#removeTask");
+
+      ejectProject.forEach((remove) => {
+        remove.addEventListener("click", () => {
+          projects().removeProject(remove.value);
+        });
+      });
+
+      removeTask.forEach((remove) => {
+        remove.addEventListener("click", (event) => {
+          event.preventDefault();
+          tasks().listRemove(remove.value);
+        });
+      });
     },
   };
   return Object.assign(Object.create(proto));
@@ -127,19 +139,5 @@ addProject.addEventListener("click", (event) => {
   event.preventDefault();
   projects().addProject(projectName.value);
 });
+
 tasks().display();
-
-ejectProject.forEach((remove) => {
-  remove.addEventListener("click", (event) => {
-    event.preventDefault();
-    projects().removeProject(remove.value);
-    console.log(list);
-  });
-});
-
-removeTask.forEach((remove) => {
-  remove.addEventListener("click", (event) => {
-    event.preventDefault();
-    tasks().listRemove(this.tasksTitle.value, remove.value);
-  });
-});
