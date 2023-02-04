@@ -24,10 +24,6 @@ let list = [
       },
     ],
   },
-  {
-    title: "Project 2",
-    tasks: [],
-  },
 ];
 let id = 1;
 
@@ -35,11 +31,13 @@ const projects = (title) => {
   const proto = {
     title: title,
 
-    addProject: () => {
+    addProject: (title) => {
       list.push({
         title: title,
         tasks: [],
       });
+      taskType.innerHTML += `<option value="${title}">${title}</option>`;
+      tasks().display();
     },
 
     removeProject: (project) => {
@@ -119,5 +117,6 @@ addTask.addEventListener("click", (event) => {
 
 addProject.addEventListener("click", (event) => {
   event.preventDefault();
+  projects().addProject(projectName.value);
 });
 tasks().display();
