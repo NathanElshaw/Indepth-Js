@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.formControl {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  gap: 0.25em;
+  flex-direction: column;
+  margin: auto;
+}
+
+input:invalid {
+  box-shadow: 1px solid red;
+}
+
+input:valid {
+  box-shadow: 1px solid green;
+}
+
+input:focus:invalid {
+  box-shadow: none;
+}
