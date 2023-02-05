@@ -1,14 +1,16 @@
-const email = document.getElementById("#email");
+const username = document.querySelector("#username");
+const email = document.querySelector("#email");
 const submit = document.querySelector("#submit");
 
-email.addEventListener("input", (event) => {
-  if (email.validity.typeMismatch) {
-    email.setCustomValidity("I am expecting an email address!");
-  } else {
-    email.setCustomValidity("");
-  }
-});
-
 submit.addEventListener("click", (event) => {
-  event.preventDefault();
+  //validity check should be in the submit function to check validity
+  if (email.validity.tooShort) {
+    event.preventDefault();
+    email.setCustomValidity("It needs to be longer");
+  } else {
+    email.setCustomValidity("should of gone");
+  }
+  //Make sure to add report Validity to output
+  email.reportValidity();
+  console.log(email.validity.tooShort);
 });
