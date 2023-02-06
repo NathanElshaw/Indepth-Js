@@ -14,3 +14,5 @@ submit.addEventListener("click", (event) => {
   email.reportValidity();
   console.log(email.validity.tooShort);
 });
+
+console.log();
