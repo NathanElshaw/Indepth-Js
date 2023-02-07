@@ -9,7 +9,8 @@ async function getWeather(val1, val2) {
   if (typeof val1 === "string") {
     try {
       data = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${val1}&units=imperial&appid=${KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${val1}&units=imperial&appid=${KEY}`,
+        { method: "GET", mode: "cors" }
       );
     } catch (e) {
       console.log(e);
@@ -26,7 +27,11 @@ async function getWeather(val1, val2) {
   }
   const weatherData = await data.json();
   console.log(weatherData);
-  weatherInfo.innerHTML = `Name: ${weatherData.name} Temp: ${weatherData.main.temp} Feels Like: ${weatherData.main.feels_like}`;
+  weatherInfo.innerHTML = `
+  <h2>${weatherData.name}</h2>
+  <p>${weatherData.weather[0].main}</p>
+  <p>Temp: ${weatherData.main.temp}</p>
+  <p>Feels like: ${weatherData.main.feels_like}</p>`;
 }
 
 window.onload = function () {
@@ -41,6 +46,6 @@ window.onload = function () {
     getWeather(city.value);
   });
 
-  getWeather(44.59, -89.123);
+  //getWeather(44.59, -89.123);
   //   getLocation();
 };
