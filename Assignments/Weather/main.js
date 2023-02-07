@@ -29,9 +29,10 @@ async function getWeather(val1, val2) {
   console.log(weatherData);
   weatherInfo.innerHTML = `
   <h2>${weatherData.name}</h2>
-  <p>${weatherData.weather[0].main}</p>
+  <p>${weatherData.weather[0].main} <img src="http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png"</p>
   <p>Temp: ${weatherData.main.temp}</p>
-  <p>Feels like: ${weatherData.main.feels_like}</p>`;
+  <p>H: ${weatherData.main.temp_max} L: ${weatherData.main.temp_min}</p>
+  <p>Feels like:    ${weatherData.main.feels_like}</p>`;
 }
 
 window.onload = function () {
@@ -46,6 +47,6 @@ window.onload = function () {
     getWeather(city.value);
   });
 
-  //getWeather(44.59, -89.123);
+  getWeather(44.59, -89.123);
   //   getLocation();
 };
