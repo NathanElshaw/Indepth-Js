@@ -5,11 +5,16 @@ const weatherInfo = document.querySelector("#weatherInfo");
 
 async function getWeather(val1, val2) {
   let data = "";
+  let forecast;
   console.log(typeof val1);
   if (typeof val1 === "string") {
     try {
       data = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${val1}&units=imperial&appid=${KEY}`,
+        { method: "GET", mode: "cors" }
+      );
+      forecast = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${val1}&lon=${val2}&appid=${KEY}`,
         { method: "GET", mode: "cors" }
       );
     } catch (e) {
@@ -21,12 +26,17 @@ async function getWeather(val1, val2) {
         `https://api.openweathermap.org/data/2.5/weather?lat=${val1}&lon=${val2}&units=imperial&appid=${KEY}`,
         { method: "GET", mode: "cors" }
       );
+      forecast = await fetch(
+        (forecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${val1}&lon=${val2}&appid=${KEY}`),
+        { method: "GET", mode: "cors" }
+      );
     } catch (e) {
       console.log(e);
     }
   }
   const weatherData = await data.json();
-  console.log(weatherData);
+  const forecastData = await forecast.json();
+  console.log(forecastData);
   weatherInfo.innerHTML = `
   <h2>${weatherData.name}</h2>
   <p>${weatherData.weather[0].main} <img src="http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png"</p>
