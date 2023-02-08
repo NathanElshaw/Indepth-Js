@@ -123,7 +123,7 @@ async function getWeather(val1, val2) {
     console.log(forecastArr);
     forecastInfo.innerHTML += `
     <div>
-    <p>Date: ${forecast[0].dt_txt}</p> 
+    <p>Date: ${Date(forecast[0].dt)}</p> 
    <h2>${forecast[0].weather[0].main}</h2>
     <p>H: ${max(forecast)} L: ${min(forecast)}</p>
     <p>Feels like:</p>
