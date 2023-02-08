@@ -7,7 +7,6 @@ const forecastInfo = document.querySelector("#forecastInfo");
 async function getWeather(val1, val2) {
   let data = "";
   let forecast;
-  console.log(typeof val1);
   if (typeof val1 === "string") {
     try {
       data = await fetch(
@@ -39,10 +38,11 @@ async function getWeather(val1, val2) {
   const forecastData = await forecast.json();
 
   weatherInfo.innerHTML = `
+  <h3>Current Weather:</h3>
   <h2>${weatherData.name}</h2>
   <p>${weatherData.weather[0].main} <img src="http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png"</p>
-  <p>Temp: ${weatherData.main.temp}</p>
-  <p>H: ${weatherData.main.temp_max} L: ${weatherData.main.temp_min}</p>
+  <p>Temp: ${weatherData.main.temp} &#8457;</p>
+  <p>H: ${weatherData.main.temp_max} &#8457; L: ${weatherData.main.temp_min} &#8457;</p>
   <p>Feels like:    ${weatherData.main.feels_like}</p>`;
 
   let forecastArr = [
@@ -104,7 +104,7 @@ async function getWeather(val1, val2) {
         num = arg[i].main.temp_min;
       }
     }
-    console.log(num);
+    num = Math.round(num);
     return num;
   }
 
@@ -115,18 +115,40 @@ async function getWeather(val1, val2) {
         num = arg[i].main.temp_min;
       }
     }
-    console.log(num);
+    num = Math.round(num);
     return num;
   }
 
+  function getDate(arg) {
+    let days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    let date = arg.dt_txt;
+    let newDate = new Date(date);
+    date = newDate.getDate();
+    newDate = newDate.getDay();
+    let display = days[newDate];
+    display = display.concat(" ", date);
+    return display;
+  }
+
   forecastArr.forEach((forecast) => {
-    console.log(forecastArr);
     forecastInfo.innerHTML += `
     <div>
-    <p>Date: ${Date(forecast[0].dt)}</p> 
-   <h2>${forecast[0].weather[0].main}</h2>
-    <p>H: ${max(forecast)} L: ${min(forecast)}</p>
-    <p>Feels like:</p>
+    <h2>${getDate(forecast[1])}</h2> 
+   <h3>${
+     forecast[0].weather[0].main
+   } <img src="http://openweathermap.org/img/wn/${
+      forecast[0].weather[0].icon
+    }@2x.png"</h3>
+    <p>H: ${max(forecast)} &#8457;</p>
+    <p>L: ${min(forecast)} &#8457;</p>
     </div>`;
   });
 } //0,7,15,23,31
