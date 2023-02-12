@@ -1,25 +1,20 @@
-const linkList = (arr) => {
-  const proto = {
-    addNode: (arg) => {},
-
-    append: (arg) => {},
-
-    preappend: (arg) => {},
-
-    size: (arg) => {},
-
-    tail: (arg) => {},
-
-    at: (arg) => {},
-
-    pop: (arg) => {},
-
-    contains: (arg) => {},
-
-    find: (arg) => {},
-
-    toString: (arg) => {},
+const linkList = () => {
+  const append = () => {
+    console.log(arg);
   };
-  Object.assign.Object(proto);
+  return {
+    append,
+  };
 };
-const node = (data) => {};
+
+const Node = (input) => {
+  return {
+    value: input || null,
+    nextNode: null,
+    appendValue(newInput) {
+      this.value = newInput;
+    },
+  };
+};
+
+console.log(Node.appendValue("new"));
