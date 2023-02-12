@@ -1,9 +1,33 @@
 const linkList = () => {
-  const append = () => {
-    console.log(arg);
+  let HEAD = null;
+  let length = 0;
+
+  const append = (value) => {
+    const NewNode = Node(value);
+    length++;
+    if (HEAD == null) {
+      return (HEAD = NewNode);
+    }
+    let pointer = HEAD;
+    while (pointer.nextNode !== null) {
+      pointer = pointer.nextNode;
+    }
+    pointer.nextNode = NewNode;
   };
+
+  const preappend = (value) => {
+    const newNode = Node(value);
+    length++;
+    if (HEAD !== null) {
+      return (HEAD = newNode);
+    }
+    newNode.nextNode = HEAD;
+    HEAD = newNode;
+  };
+
   return {
     append,
+    preappend,
   };
 };
 
