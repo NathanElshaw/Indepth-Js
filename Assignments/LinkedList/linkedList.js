@@ -73,6 +73,27 @@ class LinkedList {
       }
     }
   }
+
+  find(value) {
+    let current = this.HEAD;
+    for (let i = 0; i < this.length; i++) {
+      if (current.value === value) {
+        return i;
+      }
+      current = current.next;
+    }
+  }
+
+  toString() {
+    let current = this.HEAD;
+    let string = `LinkedList: ${current.value}`;
+    current = current.next;
+    for (let i = 1; i < this.length; i++) {
+      string = string.concat(" -> ", current.value);
+      current = current.next;
+    }
+    return string;
+  }
 }
 
 class Node {
@@ -95,5 +116,5 @@ const ll = new LinkedList();
 ll.preappend(10);
 ll.preappend(20);
 ll.append(5);
-ll.pop();
-console.log(ll);
+
+console.log(ll.toString());
