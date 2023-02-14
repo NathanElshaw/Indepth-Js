@@ -94,6 +94,33 @@ class LinkedList {
     }
     return string;
   }
+
+  insertAt(index, value) {
+    if (index < 0 || index >= this.length - 1) return null;
+    let current = this.HEAD;
+    for (let i = 0; i < this.length; i++) {
+      if (i === index - 1) {
+        let next = current.next;
+        current.next = new Node(value, next);
+        this.length++;
+      }
+      current = current.next;
+    }
+  }
+
+  removeAt(index) {
+    if (index < 0 || index >= this.length - 1) return null;
+    let current = this.HEAD;
+    for (let i = 0; i < this.length - 1; i++) {
+      if (i === index - 1) {
+        let next = current.next.next;
+        current.next = next;
+        this.length--;
+      } else {
+        current = current.next;
+      }
+    }
+  }
 }
 
 class Node {
@@ -116,5 +143,9 @@ const ll = new LinkedList();
 ll.preappend(10);
 ll.preappend(20);
 ll.append(5);
+ll.insertAt(1, 15);
 
+console.log(ll.toString());
+
+ll.removeAt(1);
 console.log(ll.toString());
