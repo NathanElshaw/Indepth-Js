@@ -6,20 +6,22 @@ class Bst {
   }
 
   createTree(arr) {
-    if (this.arr === undefined) {
-      this.arr = arr;
-    }
     let middle = Math.floor(arr.length / 2);
     let left = arr.slice(0, middle - 1);
     let right = arr.slice(middle, arr.length);
-    console.log(left, middle, right);
-    middle = arr[middle];
+    if (arr.length < 2) {
+      return arr;
+    } else {
+      this.createRoot();
+    }
   }
+
+  createRoot(arr) {}
 }
 
 class Tree {
   constructor(node, left, right) {
-    this.node = node;
+    this.Value = node;
     this.left = left;
     this.right = right;
   }
