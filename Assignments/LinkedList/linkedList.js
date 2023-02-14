@@ -5,12 +5,17 @@ class LinkedList {
 
   append(data) {
     let current = this.HEAD;
-    for (let i = 0; i < this.length; i++) {
-      if (current.next === null) {
-        current.next = new Node(data, null);
-        this.length++;
-      } else {
-        current = current.next;
+    if (this.HEAD === null) {
+      this.HEAD = new Node(data, this.HEAD);
+      this.length++;
+    } else {
+      for (let i = 0; i < this.length; i++) {
+        if (current.next === null) {
+          current.next = new Node(data, null);
+          this.length++;
+        } else {
+          current = current.next;
+        }
       }
     }
   }
@@ -54,8 +59,10 @@ class LinkedList {
     let current = this.HEAD;
     for (let i = 0; i < this.length; i++) {
       if (current.next.next == null) {
+        let value = current.next.value;
         current.next = null;
         this.length--;
+        return value;
       }
       current = current.next;
     }
@@ -92,6 +99,7 @@ class LinkedList {
       string = string.concat(" -> ", current.value);
       current = current.next;
     }
+    string = string.concat(" -> Null");
     return string;
   }
 
@@ -109,7 +117,7 @@ class LinkedList {
   }
 
   removeAt(index) {
-    if (index < 0 || index >= this.length - 1) return null;
+    if (index < 0 || index > this.length) return null;
     let current = this.HEAD;
     for (let i = 0; i < this.length - 1; i++) {
       if (i === index - 1) {
@@ -130,22 +138,4 @@ class Node {
   }
 }
 
-LinkedList.fromValues = function (...value) {
-  const ll = new LinkedList();
-  for (let i = value.length - 1; i >= 0; i--) {
-    ll.insertAtHead(value[i]);
-  }
-  return ll;
-};
-
-const ll = new LinkedList();
-
-ll.preappend(10);
-ll.preappend(20);
-ll.append(5);
-ll.insertAt(1, 15);
-
-console.log(ll.toString());
-
-ll.removeAt(1);
-console.log(ll.toString());
+module.exports = LinkedList;
