@@ -46,6 +46,59 @@ class Bst {
     node.right = this.createTree(arr, mid + 1, end);
     return node;
   }
+
+  insert(value) {
+    let inserted = false;
+    let current = this.root;
+    while (inserted === false) {
+      if (current.right == null && current.data <= value) {
+        current.right = new Node(value);
+        inserted = true;
+      } else if (current.left == null && current.data > value) {
+        current.left = new Node(value);
+        inserted = true;
+      }
+      if (value >= current.data) {
+        current = current.right;
+      } else {
+        current = current.left;
+      }
+    }
+  }
+
+  delete(value) {
+    let deleted = false;
+    let current = this.root;
+    while (deleted === false) {
+      if (current.right || current.left === value) {
+        {
+          if (current.right === value) {
+            if (current.right !== null) {
+              if (current.right.right || current.right.left !== null) {
+                current.right = current.right.right;
+              } else {
+                current.right = null;
+              }
+            }
+          }
+          if (current.left !== null) {
+            if (current.left.right || current.left.left !== null) {
+              current.left = current.left.right;
+            } else {
+              current.left = null;
+            }
+            deleted = true;
+          }
+        }
+      } else {
+        if (current.data <= value) {
+          current = current.right;
+        } else {
+          current = current.left;
+        }
+      }
+    }
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -61,6 +114,7 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 const bt = new Bst();
 
 bt.createTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+//bt.delete(10);
 
 console.log(prettyPrint(bt.root));
 
