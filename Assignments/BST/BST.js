@@ -4,42 +4,13 @@
 When an  sorted array is given it creates a binary tree
 
 */
-let arr = [];
-
-const mergeSort = (arr) => {
-  if (arr.length < 2) {
-    return arr;
-  } else {
-    let mid = Math.floor(arr.length / 2);
-    let left = arr.slice(0, mid);
-    let right = arr.slice(mid, arr.length);
-    return Merge(mergeSort(left), mergeSort(right));
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
   }
-};
-
-const Merge = (leftArr, rightArr) => {
-  let result = [];
-  while (leftArr.length > 0 && 0 < rightArr.length) {
-    if (leftArr[0] < rightArr[0]) {
-      result.push(leftArr[0]);
-      leftArr.splice(0, 1);
-    } else {
-      result.push(rightArr[0]);
-      rightArr.splice(0, 1);
-    }
-  }
-  if (leftArr.length > 0) {
-    leftArr.forEach((arr) => {
-      result.push(arr);
-    });
-  }
-  if (rightArr.length > 0) {
-    rightArr.forEach((arr) => {
-      result.push(arr);
-    });
-  }
-  return result;
-};
+}
 
 class Bst {
   constructor() {
@@ -56,41 +27,41 @@ class Bst {
     return isSorted;
   }
 
-  createTree(arr) {
-    let mid = Math.floor(arr.length / 2);
-    let left = arr.slice(0, mid);
-    let right = arr.slice(mid, arr.length);
-    mid = arr[mid];
-    if (arr.length <= 2) {
-      if (mid == right) {
-        return { value: mid, left: parseInt(left), right: null };
-      }
+  createTree(arr, start, end) {
+    if (start === undefined) {
+      start = 0;
     }
-    console.log(left, mid, right);
-    const newRoot = new Node(mid);
-    if (this.root == null) {
-      this.root = newRoot;
+    if (end === undefined) {
+      end = arr.length - 1;
     }
-    return {
-      value: mid,
-      left: this.createTree(left),
-      right: this.createTree(right),
-    };
+    if (start > end) {
+      return null;
+    }
+    var mid = parseInt((start + end) / 2);
+    var node = new Node(arr[mid]);
+    if (this.root === null) {
+      this.root = node;
+    }
+    node.left = this.createTree(arr, start, mid - 1);
+    node.right = this.createTree(arr, mid + 1, end);
+    return node;
   }
 }
 
-class Node {
-  constructor(data, left, right) {
-    this.data = data;
-    this.left = left;
-    this.right = right;
+const prettyPrint = (node, prefix = "", isLeft = true) => {
+  if (node.right !== null) {
+    prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
   }
-}
+  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+  if (node.left !== null) {
+    prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+  }
+};
 
 const bt = new Bst();
 
-bt.createTree([1, 2, 3, 4, 5]);
+bt.createTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
-console.log(bt);
+console.log(prettyPrint(bt.root));
 
 //module.exports = Bst;
