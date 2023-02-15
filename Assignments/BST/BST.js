@@ -43,7 +43,7 @@ const Merge = (leftArr, rightArr) => {
 
 class Bst {
   constructor() {
-    this.treeHead = null;
+    this.root = null;
   }
 
   checkArr(arr) {
@@ -57,28 +57,31 @@ class Bst {
   }
 
   createTree(arr) {
-    if (this.checkArr(arr) === false) {
-      return this.createTree(this.checkArr(mergeSort(arr)));
-    } else if (this.checkArr(arr) === true) {
-      let middle = Math.floor(arr.length / 2);
-      let left = arr.slice(0, middle);
-      let right = arr.slice(middle + 1, arr.length);
-      middle = arr[middle];
-      const newTree = new Tree(middle, left, right);
-      if (this.treeHead == null) {
-        this.treeHead = newTree;
+    let mid = Math.floor(arr.length / 2);
+    let left = arr.slice(0, mid);
+    let right = arr.slice(mid, arr.length);
+    mid = arr[mid];
+    if (arr.length <= 2) {
+      if (mid == right) {
+        return { value: mid, left: parseInt(left), right: null };
       }
-      let current = this.treeHead;
-      this.createRoot(current);
     }
+    console.log(left, mid, right);
+    const newRoot = new Node(mid);
+    if (this.root == null) {
+      this.root = newRoot;
+    }
+    return {
+      value: mid,
+      left: this.createTree(left),
+      right: this.createTree(right),
+    };
   }
-
-  createRoot(arr) {}
 }
 
-class Tree {
-  constructor(value, left, right) {
-    this.value = value;
+class Node {
+  constructor(data, left, right) {
+    this.data = data;
     this.left = left;
     this.right = right;
   }
