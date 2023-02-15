@@ -1,9 +1,3 @@
-/*
-1. Create a function that checks if an array is sorted -Check
-
-When an  sorted array is given it creates a binary tree
-
-*/
 let arr = [];
 
 const mergeSort = (arr) => {
@@ -41,28 +35,4 @@ const Merge = (leftArr, rightArr) => {
   return result;
 };
 
-class Bst {
-  checkArr(arr) {
-    let isSorted = true;
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] > arr[i + 1]) {
-        isSorted = false;
-      }
-    }
-    return isSorted;
-  }
-
-  createTree(arr) {
-    if (this.checkArr(arr) === false) {
-      return this.createTree(this.checkArr(mergeSort(arr)));
-    } else if (this.checkArr(arr) === true) {
-      return "Array is sorted";
-    }
-  }
-
-  createRoot(arr) {}
-}
-
-class Tree {}
-
-module.exports = Bst;
+export default mergeSort;
