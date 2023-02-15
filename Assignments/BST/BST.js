@@ -1,6 +1,6 @@
 /*
 1. Create a function that checks if an array is sorted -Check
-
+2. If the array is unsorted when put into the CreateTree it sorts it -Check
 When an  sorted array is given it creates a binary tree
 
 */
@@ -42,6 +42,10 @@ const Merge = (leftArr, rightArr) => {
 };
 
 class Bst {
+  constructor() {
+    this.treeHead = null;
+  }
+
   checkArr(arr) {
     let isSorted = true;
     for (let i = 0; i < arr.length; i++) {
@@ -56,13 +60,34 @@ class Bst {
     if (this.checkArr(arr) === false) {
       return this.createTree(this.checkArr(mergeSort(arr)));
     } else if (this.checkArr(arr) === true) {
-      return "Array is sorted";
+      let middle = Math.floor(arr.length / 2);
+      let left = arr.slice(0, middle);
+      let right = arr.slice(middle + 1, arr.length);
+      middle = arr[middle];
+      const newTree = new Tree(middle, left, right);
+      if (this.treeHead == null) {
+        this.treeHead = newTree;
+      }
+      let current = this.treeHead;
+      this.createRoot(current);
     }
   }
 
   createRoot(arr) {}
 }
 
-class Tree {}
+class Tree {
+  constructor(value, left, right) {
+    this.value = value;
+    this.left = left;
+    this.right = right;
+  }
+}
 
-module.exports = Bst;
+const bt = new Bst();
+
+bt.createTree([1, 2, 3, 4, 5]);
+
+console.log(bt);
+
+//module.exports = Bst;
