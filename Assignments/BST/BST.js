@@ -108,9 +108,15 @@ class Bst {
     let current = this.root;
     let isFound = false;
     while (isFound == false) {
-      if (current.right.data === value) {
+      if (current.right && current.left === null) {
+        current = "Not Found";
         isFound = true;
-      } else if (current.left.data === value) {
+      }
+      if (current.right === value) {
+        current = current.right;
+        isFound = true;
+      } else if (current.left === value) {
+        current = current.left;
         isFound = true;
       }
       if (value > current.data) {
