@@ -122,6 +122,32 @@ class Bst {
       return this.find(value, root);
     }
   }
+
+  levelOrder(current, result) {
+    if (current === undefined) {
+      current = [this.root];
+    }
+    if (result === undefined) {
+      result = [];
+    }
+    let next = [];
+    if (current.length == 0) {
+      return result;
+    }
+    current.forEach((root) => {
+      if (root !== null || undefined) {
+        if (root.left == null && root.right == null) {
+          return null;
+        } else {
+          next.push(root.left);
+          next.push(root.right);
+          result.push(root.data);
+        }
+      }
+    });
+    console.log(result);
+    this.levelOrder(next, result);
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -134,11 +160,13 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-const bt = new Bst();
+const tree = new Bst();
 
-bt.createTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+tree.createTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
 
-console.log(bt.find(16));
+console.log(prettyPrint(tree.root));
+tree.levelOrder();
+
 //console.log(prettyPrint(bt.root));
 
 //module.exports = Bst;
