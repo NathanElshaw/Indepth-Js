@@ -108,13 +108,15 @@ class Bst {
     let current = this.root;
     let isFound = false;
     while (isFound == false) {
-      if (current == value) {
+      if (current.right.data === value) {
+        isFound = true;
+      } else if (current.left.data === value) {
         isFound = true;
       }
-      if (value > current) {
+      if (value > current.data) {
         current = current.right;
       } else {
-        current = current.right;
+        current = current.left;
       }
     }
     return current;
