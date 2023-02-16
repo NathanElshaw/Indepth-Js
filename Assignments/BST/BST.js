@@ -104,28 +104,23 @@ class Bst {
     }
   }
 
-  find(value) {
-    let current = this.root;
-    let isFound = false;
-    while (isFound == false) {
-      if (current.right && current.left === null) {
-        current = "Not Found";
-        isFound = true;
-      }
-      if (current.right === value) {
-        current = current.right;
-        isFound = true;
-      } else if (current.left === value) {
-        current = current.left;
-        isFound = true;
-      }
-      if (value > current.data) {
-        current = current.right;
-      } else {
-        current = current.left;
-      }
+  find(value, root) {
+    if (root === undefined) {
+      root = this.root;
     }
-    return current;
+    if (value === root.data) {
+      return root;
+    }
+    if (root.left == null && root.right == null) {
+      return null;
+    }
+    if (value >= root.data) {
+      root = root.right;
+      return this.find(value, root);
+    } else {
+      root = root.left;
+      return this.find(value, root);
+    }
   }
 }
 
@@ -143,7 +138,7 @@ const bt = new Bst();
 
 bt.createTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
 
-console.log(bt.find(13));
+console.log(bt.find(16));
 //console.log(prettyPrint(bt.root));
 
 //module.exports = Bst;
