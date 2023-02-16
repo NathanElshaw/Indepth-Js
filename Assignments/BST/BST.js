@@ -69,7 +69,55 @@ class Bst {
   delete(value) {
     let deleted = false;
     let current = this.root;
-    while (deleted === false) {}
+    while (deleted === false) {
+      let temp = null;
+      if (current.data < value) {
+        temp = current;
+        current = current.right;
+      } else {
+        temp = current;
+        current = current.left;
+      }
+      if (current.data === value) {
+        if (current.right != null) {
+          let newNode = new Node(
+            current.right.data,
+            current.right.left,
+            current.right.right
+          );
+          current.data = newNode.data;
+          current.right = current.right.right;
+        } else if (current.left != null) {
+          let newNode = new Node(current.left.data, current.left, current.left);
+          current.data = newNode.data;
+          current.left = newNode.left;
+          current.right = newNode.right;
+        } else {
+          if (temp.right.data == value) {
+            temp.right = null;
+          } else {
+            temp.left = null;
+          }
+        }
+        deleted = true;
+      }
+    }
+  }
+
+  find(value) {
+    let current = this.root;
+    let isFound = false;
+    while (isFound == false) {
+      if (current == value) {
+        isFound = true;
+      }
+      if (value > current) {
+        current = current.right;
+      } else {
+        current = current.right;
+      }
+    }
+    return current;
   }
 }
 
@@ -85,9 +133,9 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 
 const bt = new Bst();
 
-bt.createTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-bt.delete(10);
+bt.createTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
 
+console.log(bt.find(13));
 //console.log(prettyPrint(bt.root));
 
 //module.exports = Bst;
