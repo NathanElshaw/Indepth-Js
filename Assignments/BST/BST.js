@@ -131,13 +131,13 @@ class Bst {
       result = [];
     }
     let next = [];
-    if (current.length == 0) {
+    if (current.length === 0) {
       return result;
     }
     current.forEach((root) => {
       if (root !== null || undefined) {
         if (root.left == null && root.right == null) {
-          return null;
+          result.push(root.data);
         } else {
           next.push(root.left);
           next.push(root.right);
@@ -145,8 +145,7 @@ class Bst {
         }
       }
     });
-    console.log(result);
-    this.levelOrder(next, result);
+    return this.levelOrder(next, result);
   }
 }
 
@@ -160,13 +159,4 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-const tree = new Bst();
-
-tree.createTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
-
-console.log(prettyPrint(tree.root));
-tree.levelOrder();
-
-//console.log(prettyPrint(bt.root));
-
-//module.exports = Bst;
+module.exports = Bst;

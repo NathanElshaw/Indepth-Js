@@ -27,3 +27,14 @@ describe("#find", () => {
     expect(tree.find(19)).toBe(null);
   });
 });
+
+describe("#levelOrder", () => {
+  test("Return a level order traversal from a binary tree", () => {
+    const tree = new Bst();
+
+    tree.createTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+    expect(tree.levelOrder()).toMatchObject([
+      8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15, 16,
+    ]);
+  });
+});
