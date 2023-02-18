@@ -148,30 +148,22 @@ class Bst {
     return this.levelOrder(next, result);
   }
 
-  preorder(current, result) {
-    if (current === undefined) {
-      current = [this.root];
+  preorder(node, result) {
+    console.log("ran");
+    if (node === undefined) {
+      node = this.root;
     }
     if (result === undefined) {
       result = [];
     }
-    let next = [];
-    if (current.length === 0) {
-      return result;
+    if (node == null) {
+      return;
     }
 
-    current.forEach((root) => {
-      if (root !== null || undefined) {
-        if (root.left == null && root.right == null) {
-          result.push(root.data);
-        } else {
-          next.push(root.left);
-          next.push(root.right);
-          result.shift(root.data);
-        }
-      }
-    });
-    return this.preorder(next, result);
+    this.preorder(node.left, result);
+    this.preorder(node.right, result);
+    result.push(node.data);
+    return result;
   }
 }
 
