@@ -230,12 +230,23 @@ class Bst {
   }
 
   checkBalance(root) {
+    let isBalance = true;
     if (root === undefined) {
       root = this.root;
     }
-    if ((root = null)) {
-      return -1;
+    while (isBalance == true) {
+      if (root == null) {
+        return -1;
+      }
+      let left = this.checkBalance(root.left);
+      let right = this.checkBalance(root.right);
+      if (Math.max(left - right) > 1) {
+        console.log("error");
+        isBalance = false;
+      }
+      return Math.max(left - right) + 1;
     }
+    console.log("reached");
   }
 
   storeNodes(root, nodes) {
@@ -271,7 +282,10 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 const tree = new Bst();
 
 tree.createTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
-console.log(tree.height(16));
+//tree.insert(17);
+//tree.insert(18);
+console.log(tree.checkBalance());
+
 console.log(prettyPrint(tree.root));
 
 //module.exports = Bst;
