@@ -148,8 +148,7 @@ class Bst {
     return this.levelOrder(next, result);
   }
 
-  preorder(node, result) {
-    console.log("ran");
+  postOrder(node, result) {
     if (node === undefined) {
       node = this.root;
     }
@@ -160,9 +159,26 @@ class Bst {
       return;
     }
 
-    this.preorder(node.left, result);
-    this.preorder(node.right, result);
+    this.postOrder(node.left, result);
+    this.postOrder(node.right, result);
     result.push(node.data);
+    return result;
+  }
+
+  inOrder(node, result) {
+    if (node === undefined) {
+      node = this.root;
+    }
+    if (result === undefined) {
+      result = [];
+    }
+    if (node == null) {
+      return;
+    }
+
+    this.inOrder(node.left, result);
+    result.push(node.data);
+    this.inOrder(node.right, result);
     return result;
   }
 }
@@ -180,6 +196,7 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 const tree = new Bst();
 
 tree.createTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
-console.log(tree.preorder());
+console.log(tree.postOrder());
+console.log(tree.inOrder());
 
 //module.exports = Bst;
