@@ -152,9 +152,11 @@ class Bst {
     if (node === undefined) {
       node = this.root;
     }
+
     if (result === undefined) {
       result = [];
     }
+
     if (node == null) {
       return;
     }
@@ -169,9 +171,11 @@ class Bst {
     if (node === undefined) {
       node = this.root;
     }
+
     if (result === undefined) {
       result = [];
     }
+
     if (node == null) {
       return;
     }
@@ -180,6 +184,68 @@ class Bst {
     result.push(node.data);
     this.inOrder(node.right, result);
     return result;
+  }
+
+  preOrder(node, result) {
+    if (node === undefined) {
+      node = this.root;
+    }
+
+    if (result === undefined) {
+      result = [];
+    }
+
+    if (node == null) {
+      return;
+    }
+
+    result.push(node.data);
+    this.preOrder(node.left, result);
+    this.preOrder(node.right, result);
+    return result;
+  }
+
+  height(value, root, depth) {
+    if (depth === undefined) {
+      depth = 0;
+    } else {
+      depth++;
+    }
+    if (root === undefined) {
+      root = this.root;
+    }
+    if (value === root.data) {
+      return depth;
+    }
+    if (root.left == null && root.right == null) {
+      return null;
+    }
+    if (value >= root.data) {
+      root = root.right;
+      return this.height(value, root, depth);
+    } else {
+      root = root.left;
+      return this.height(value, root, depth);
+    }
+  }
+
+  storeNodes(root, node) {
+    if (root == null) {
+      return;
+    }
+    this.storeNodes(root.left, nodes);
+    node.push(root);
+    this.storeNodes(root.right, nodes);
+  }
+
+  treeBalance(root) {
+    if (root === undefined) {
+      root = this.root;
+    }
+    let nodes = [];
+    this.storeNodes(root, nodes);
+    let n = nodes.length;
+    this.createTree(nodes, 0, n - 1);
   }
 }
 
@@ -196,7 +262,7 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 const tree = new Bst();
 
 tree.createTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
-console.log(tree.postOrder());
-console.log(tree.inOrder());
+console.log(tree.height(16));
+console.log(prettyPrint(tree.root));
 
 //module.exports = Bst;
