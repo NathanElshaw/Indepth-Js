@@ -229,12 +229,21 @@ class Bst {
     }
   }
 
-  storeNodes(root, node) {
+  checkBalance(root) {
+    if (root === undefined) {
+      root = this.root;
+    }
+    if ((root = null)) {
+      return -1;
+    }
+  }
+
+  storeNodes(root, nodes) {
     if (root == null) {
       return;
     }
     this.storeNodes(root.left, nodes);
-    node.push(root);
+    nodes.push(root);
     this.storeNodes(root.right, nodes);
   }
 
