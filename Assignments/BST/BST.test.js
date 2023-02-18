@@ -38,3 +38,20 @@ describe("#levelOrder", () => {
     ]);
   });
 });
+
+describe("#checkBalance", () => {
+  test("Check if a tree is balanced", () => {
+    const tree = new Bst();
+    tree.createTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+    tree.insert(17);
+    tree.insert(18);
+
+    expect(tree.checkBalance()).toBe("This Tree is unbalanced");
+  });
+  test("Check is a balanced tree is balanced", () => {
+    const tree = new Bst();
+    tree.createTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+
+    expect(tree.checkBalance()).toBe("This Tree is Balanced");
+  });
+});

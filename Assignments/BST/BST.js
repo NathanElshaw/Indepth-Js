@@ -28,23 +28,27 @@ class Bst {
   }
 
   createTree(arr, start, end) {
-    if (start === undefined) {
-      start = 0;
+    if (this.checkArr(arr) == false) {
+      return "This array isnt sorted";
+    } else {
+      if (start === undefined) {
+        start = 0;
+      }
+      if (end === undefined) {
+        end = arr.length - 1;
+      }
+      if (start > end) {
+        return null;
+      }
+      var mid = parseInt((start + end) / 2);
+      var node = new Node(arr[mid]);
+      if (this.root === null) {
+        this.root = node;
+      }
+      node.left = this.createTree(arr, start, mid - 1);
+      node.right = this.createTree(arr, mid + 1, end);
+      return node;
     }
-    if (end === undefined) {
-      end = arr.length - 1;
-    }
-    if (start > end) {
-      return null;
-    }
-    var mid = parseInt((start + end) / 2);
-    var node = new Node(arr[mid]);
-    if (this.root === null) {
-      this.root = node;
-    }
-    node.left = this.createTree(arr, start, mid - 1);
-    node.right = this.createTree(arr, mid + 1, end);
-    return node;
   }
 
   insert(value) {
@@ -53,9 +57,11 @@ class Bst {
     while (inserted === false) {
       if (current.right == null && current.data <= value) {
         current.right = new Node(value);
+        this.treeBalance();
         inserted = true;
       } else if (current.left == null && current.data > value) {
         current.left = new Node(value);
+        this.treeBalance();
         inserted = true;
       }
       if (value >= current.data) {
@@ -230,23 +236,25 @@ class Bst {
   }
 
   checkBalance(root) {
-    let isBalance = true;
     if (root === undefined) {
       root = this.root;
     }
-    while (isBalance == true) {
-      if (root == null) {
-        return -1;
-      }
-      let left = this.checkBalance(root.left);
-      let right = this.checkBalance(root.right);
-      if (Math.max(left - right) > 1) {
-        console.log("error");
-        isBalance = false;
-      }
-      return Math.max(left - right) + 1;
+    if (this.returnBalance(root) > 1) {
+      return "This Tree is unbalanced";
+    } else {
+      return "This Tree is Balanced";
     }
-    console.log("reached");
+  }
+
+  returnBalance(root) {
+    if (root == null) {
+      return -1;
+    }
+    let left = this.returnBalance(root.left);
+    let right = this.returnBalance(root.right);
+    if (Math.abs(left - right) > 1) {
+    }
+    return Math.abs(left - right);
   }
 
   storeNodes(root, nodes) {
@@ -254,7 +262,7 @@ class Bst {
       return;
     }
     this.storeNodes(root.left, nodes);
-    nodes.push(root);
+    nodes.push(root.data);
     this.storeNodes(root.right, nodes);
   }
 
@@ -265,7 +273,8 @@ class Bst {
     let nodes = [];
     this.storeNodes(root, nodes);
     let n = nodes.length;
-    this.createTree(nodes, 0, n - 1);
+    this.root = null;
+    return this.createTree(nodes, 0, n - 1);
   }
 }
 
@@ -279,13 +288,4 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-const tree = new Bst();
-
-tree.createTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
-//tree.insert(17);
-//tree.insert(18);
-console.log(tree.checkBalance());
-
-console.log(prettyPrint(tree.root));
-
-//module.exports = Bst;
+module.exports = Bst;
