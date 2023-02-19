@@ -72,6 +72,8 @@ class KnightMoves {
           last: current,
           moves: moves,
         };
+      } else if (current == queue[0]) {
+        return current;
       } else {
         queue.forEach((next) => {
           return this.getPosMoves(next, end, moves);
