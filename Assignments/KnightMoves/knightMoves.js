@@ -1,9 +1,3 @@
-/*
-Show the shortest way to get to a point with knight moves
-i.e KnightMoves([0,0], [1,2]) Output:: [0,0] -> [1,2] 1 Move
-Prevent from going out side the board
-
-*/
 const KnightOffset = [
   [1, 2],
   [1, -2],
@@ -16,8 +10,8 @@ const KnightOffset = [
 ];
 
 class KnightMoves {
-  getPosMoves(current, end, moves, path) {
-    let isFound = false;
+  getPosMoves(current, end, moves, path, isfound) {
+    if (isfound === undefined) isfound = false;
     let queue = [];
     path = [];
     if (moves === undefined) moves = 0;
@@ -45,27 +39,21 @@ class KnightMoves {
       for (let i = 0; i < queue.length; i++) {
         let qR = queue[i];
         if (qR[0] === end[0] && qR[1] === end[1]) {
-          isFound = true;
+          isfound = true;
         }
       }
-      if (isFound === true) {
-        return {
+      if (isfound === true) {
+        let result = {
           path: path,
           moves: moves,
         };
-      } else if (isFound === false) {
+        console.log(result);
+        return result;
+      } else if (isfound === false) {
         queue.forEach((q) => {
-          let result = this.getPosMoves(q, end, moves, path);
-          if (result !== undefined) {
-            return result;
-          }
-          return;
+          return this.getPosMoves(q, end, moves, path, isfound);
         });
-      } else {
-        return;
       }
-    } else {
-      return undefined;
     }
   }
 }
