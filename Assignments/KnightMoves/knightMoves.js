@@ -16,15 +16,26 @@ const KnightOffset = [
 ];
 
 class KnightMoves {
-  getPosMoves(current, end, moves) {
+  getPosMoves(current, end, moves, path) {
     let isFound = false;
     let queue = [];
-    if (moves === undefined) moves = [];
-    if (moves > 7) {
+    if (path === undefined) path = [];
+    if (moves === undefined) moves = 0;
+    path.push(current);
+    if (moves < 7) {
       KnightOffset.forEach((kMoves) => {
         let x = current[0] + kMoves[0];
         let y = current[1] + kMoves[1];
-        if (x > 8 || x < 1 || y > 8 || y < 1) {
+        if (
+          x > 8 ||
+          x < 1 ||
+          y > 8 ||
+          y < 1 ||
+          x > end[0] + 2 ||
+          x < end[0] - 2 ||
+          y > end[1] + 2 ||
+          y < end[1] - 2
+        ) {
           return null;
         } else {
           queue.push([x, y]);
@@ -38,20 +49,20 @@ class KnightMoves {
         }
       }
       if (isFound === true) {
-        return {
-          current: `[${current}] -> [${end}]`,
+        console.log({
+          current: `${path}`,
           moves: moves,
-        };
+        });
       } else if (isFound === false) {
-        console.log(queue);
         queue.forEach((q) => {
-          return this.getPosMoves(q, end, moves);
+          return this.getPosMoves(q, end, moves, path);
         });
       } else {
         return;
       }
+    } else {
+      return queue;
     }
-    return queue;
   }
 }
 
