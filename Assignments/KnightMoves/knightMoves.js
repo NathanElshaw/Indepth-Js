@@ -16,69 +16,42 @@ const KnightOffset = [
   [-2, -1],
 ];
 
-class cell {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-}
-
 class KnightMoves {
   constructor(current, end) {
     this.current = current;
     this.end = end;
   }
 
-  getQ(cord) {
-    if (cord[0] > 4 && cord[1] > 4) return "Q1";
-    if (cord[0] > 4 && cord[1] <= 4) return "Q2";
-    if (cord[0] <= 4 && cord[1] <= 4) return "Q3";
-    if (cord[0] <= 1 && cord[1] > 4) return "Q4";
-  }
-
-  getPosMoves(current, end, moves, queue) {
-    let isfound = false;
-    if (moves === undefined) {
-      moves = 0;
-    }
-    queue = [];
-    if (current == end) {
-      return current;
-    } else if (
-      current[0] < 1 ||
-      current[0] > 8 ||
-      current[1] < 1 ||
-      current[1] > 8
-    ) {
-      return null;
-    } else {
-      console.log(current);
-      KnightOffset.forEach((kMove) => {
-        let x = current[0] + kMove[0];
-        let y = current[1] + kMove[1];
-        if (x < 1 || x >= 8 || y < 1 || y >= 8) {
-          return null;
-        } else {
-          if (x == end[0] && y == end[1]) {
-            isfound = true;
-          } else {
-            queue.push([x, y]);
-          }
-        }
-      });
-      moves++;
-      if (isfound === true) {
-        return {
-          last: current,
-          moves: moves,
-        };
-      } else if (current == queue[0]) {
-        return current;
+  getPosMoves(current, end, moves) {
+    let isFound = false;
+    let queue = [];
+    if (moves === undefined) moves = [];
+    KnightOffset.forEach((kMoves) => {
+      let x = current[0] + kMoves[0];
+      let y = current[1] + kMoves[1];
+      if (x > 8 || x < 1 || y > 8 || y < 1) {
+        return null;
       } else {
-        queue.forEach((next) => {
-          return this.getPosMoves(next, end, moves);
-        });
+        queue.push([x, y]);
       }
+    });
+    moves++;
+    for (let i = 0; i < queue.length; i++) {
+      let current = queue[i];
+      if (current[0] === end[0] && current[1] === end[1]) {
+        isFound = true;
+      }
+    }
+    if (isFound === true) {
+      return {
+        current: `[${current}] -> [${end}]`,
+        moves: moves,
+      };
+    } else {
+      console.log(queue);
+      queue.forEach((q) => {
+        return this.getPosMoves(q, end, moves);
+      });
     }
   }
 }
