@@ -19,9 +19,8 @@ class KnightMoves {
   getPosMoves(current, end, moves, path) {
     let isFound = false;
     let queue = [];
-    if (path === undefined) path = [];
+    path = [];
     if (moves === undefined) moves = 0;
-    path.push(current);
     if (moves < 7) {
       KnightOffset.forEach((kMoves) => {
         let x = current[0] + kMoves[0];
@@ -38,6 +37,7 @@ class KnightMoves {
         ) {
           return null;
         } else {
+          path.push(`[${current}]`);
           queue.push([x, y]);
         }
       });
@@ -49,19 +49,23 @@ class KnightMoves {
         }
       }
       if (isFound === true) {
-        console.log({
-          current: `${path}`,
+        return {
+          path: path,
           moves: moves,
-        });
+        };
       } else if (isFound === false) {
         queue.forEach((q) => {
-          return this.getPosMoves(q, end, moves, path);
+          let result = this.getPosMoves(q, end, moves, path);
+          if (result !== undefined) {
+            return result;
+          }
+          return;
         });
       } else {
         return;
       }
     } else {
-      return queue;
+      return undefined;
     }
   }
 }
