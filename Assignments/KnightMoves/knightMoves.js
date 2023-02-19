@@ -4,47 +4,27 @@ i.e KnightMoves([0,0], [1,2]) Output:: [0,0] -> [1,2] 1 Move
 Prevent from going out side the board
 
 */
-
-const KnightMoves = (start, finish) => {
-  const knightsOffset = [
-    [2, -1],
-    [2, 1],
-    [1, 2],
-    [-1, 2],
-    [1, -2],
-    [-1, -2],
-    [-2, 1],
-    [-2, -1],
-  ];
-
-  const Knight = new Gameboard(start);
-  Knight.calc(start, finish);
-  return Knight;
-};
-
-class Gameboard {
-  constructor(head) {
-    this.root = head;
-  }
-
-  calc(start, finish) {
-    let [posX, posY] = [start[0], start[1]];
-    let [endX, endY] = [finish[0], finish[1]];
+class cell {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
   }
 }
 
-class possibleMove {
-  constructor(current, opt1, opt2, opt3, opt4, opt5, opt6, opt7, opt8) {
-    current: current;
-    opt1: null;
-    opt2: null;
-    opt3: null;
-    opt4: null;
-    opt5: null;
-    opt6: null;
-    opt7: null;
-    opt8: null;
+class KnightMoves {
+  constructor(current, end) {
+    this.current = current;
+    this.end = end;
+  }
+
+  getQ(cord) {
+    if (cord[0] > 4 && cord[1] > 4) return "Q1";
+    if (cord[0] > 4 && cord[1] <= 4) return "Q2";
+    if (cord[0] <= 4 && cord[1] <= 4) return "Q3";
+    if (cord[0] <= 1 && cord[1] > 4) return "Q4";
   }
 }
 
-console.log(KnightMoves([1, 3], [3, 3]));
+const chess = new KnightMoves();
+
+console.log(chess.getQ([1, 1]));
