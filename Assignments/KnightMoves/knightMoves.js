@@ -29,7 +29,7 @@ class KnightMoves {
     path = path === undefined ? [current] : path.concat([current]);
     let queue = [];
     moves = moves === undefined ? 0 : moves;
-    if (moves < 7) {
+    if (moves <= 6) {
       KnightOffset.forEach((kMoves) => {
         let x = current[0] + kMoves[0];
         let y = current[1] + kMoves[1];
@@ -41,9 +41,9 @@ class KnightMoves {
       moves++;
       for (let i = 0; i < queue.length; i++) {
         let qR = queue[i];
-        qR[0] === end[0] && qR[1] === end[1]
-          ? (isfound = true)
-          : (isfound = false);
+        if (qR[0] === end[0] && qR[1] === end[1]) {
+          isfound = true;
+        }
       }
       if (isfound === true) {
         path = path.concat([end]);
@@ -51,7 +51,6 @@ class KnightMoves {
           path: path,
           moves: moves,
         };
-        console.log(result);
         if (cell.moves > result.moves) {
           this.results = new Cell(result.path, result.moves);
         }
@@ -63,8 +62,4 @@ class KnightMoves {
     }
   }
 }
-
-const chess = new KnightMoves();
-
-console.log(chess.getPosMoves([1, 1], [6, 6]));
-console.log(chess.results);
+module.exports = KnightMoves;
