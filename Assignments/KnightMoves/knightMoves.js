@@ -8,50 +8,56 @@ const KnightOffset = [
   [-2, 1],
   [-2, -1],
 ];
+class Cell {
+  constructor(path, moves) {
+    this.path = path;
+    this.moves = moves;
+  }
+}
 
 class KnightMoves {
-  getPosMoves(current, end, moves, path, isfound) {
-    if (isfound === undefined) isfound = false;
+  constructor() {
+    this.results = null;
+  }
+
+  getPosMoves(current, end, moves, path) {
+    let cell = this.results;
+    if (cell === null) {
+      cell = new Cell([], 10);
+    }
+    let isfound = false;
+    path = path === undefined ? [current] : path.concat([current]);
     let queue = [];
-    path = [];
-    if (moves === undefined) moves = 0;
+    moves = moves === undefined ? 0 : moves;
     if (moves < 7) {
       KnightOffset.forEach((kMoves) => {
         let x = current[0] + kMoves[0];
         let y = current[1] + kMoves[1];
-        if (
-          x > 8 ||
-          x < 1 ||
-          y > 8 ||
-          y < 1 ||
-          x > end[0] + 2 ||
-          x < end[0] - 2 ||
-          y > end[1] + 2 ||
-          y < end[1] - 2
-        ) {
-          return null;
+        if (x > 8 || x < 1 || y > 8 || y < 1) {
         } else {
-          path.push(`[${current}]`);
           queue.push([x, y]);
         }
       });
       moves++;
       for (let i = 0; i < queue.length; i++) {
         let qR = queue[i];
-        if (qR[0] === end[0] && qR[1] === end[1]) {
-          isfound = true;
-        }
+        qR[0] === end[0] && qR[1] === end[1]
+          ? (isfound = true)
+          : (isfound = false);
       }
       if (isfound === true) {
+        path = path.concat([end]);
         let result = {
           path: path,
           moves: moves,
         };
         console.log(result);
-        return result;
+        if (cell.moves > result.moves) {
+          this.results = new Cell(result.path, result.moves);
+        }
       } else if (isfound === false) {
         queue.forEach((q) => {
-          return this.getPosMoves(q, end, moves, path, isfound);
+          return this.getPosMoves(q, end, moves, path);
         });
       }
     }
@@ -60,4 +66,5 @@ class KnightMoves {
 
 const chess = new KnightMoves();
 
-console.log(chess.getPosMoves([1, 1], [3, 3]));
+console.log(chess.getPosMoves([1, 1], [6, 6]));
+console.log(chess.results);
