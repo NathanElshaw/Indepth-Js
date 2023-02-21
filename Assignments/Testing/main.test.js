@@ -11,3 +11,9 @@ describe("#reverseString", () => {
     expect(func.reverseStr("Hello")).toBe("olleH");
   });
 });
+
+describe("#ceaserCiper", () => {
+  test("Create a ceaser ciper with the string given an offset", () => {
+    expect(func.ceaserCiper("Hello there!", 5)).toBe("Hjqqt ymjwj!");
+  });
+});
