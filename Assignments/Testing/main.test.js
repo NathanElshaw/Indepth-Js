@@ -17,3 +17,14 @@ describe("#ceaserCiper", () => {
     expect(func.ceaserCiper("Hello there!", 5)).toBe("Hjqqt ymjwj!");
   });
 });
+
+describe("#analyzeArray", () => {
+  test("Input an array and get data from it", () => {
+    expect(func.analyzeArray([1, 2, 3, 4, 5, 12])).toMatchObject({
+      avg: 4.5,
+      legnth: 6,
+      max: 12,
+      min: 1,
+    });
+  });
+});

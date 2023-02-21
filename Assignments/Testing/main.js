@@ -62,4 +62,39 @@ module.exports = {
     }
     return result;
   },
+
+  analyzeArray(arr) {
+    const min = (arr) => {
+      let low = 10 ^ 6;
+      for (let i = 0; i < arr.length; i++) {
+        low = arr[i] < low ? (low = arr[i]) : (low = low);
+      }
+      return low;
+    };
+    const max = (arr) => {
+      let maxR = 0;
+      for (let i = 0; i < arr.length; i++) {
+        maxR = arr[i] > maxR ? (maxR = arr[i]) : (maxR = maxR);
+      }
+      return maxR;
+    };
+    const avg = (arr) => {
+      let result = 0;
+      for (let i = 0; i < arr.length; i++) {
+        result = result + arr[i];
+      }
+      result = result / arr.length;
+      return result;
+    };
+    const length = (arr) => {
+      let result = arr.length;
+      return result;
+    };
+    return {
+      min: min(arr),
+      max: max(arr),
+      avg: avg(arr),
+      legnth: length(arr),
+    };
+  },
 };
