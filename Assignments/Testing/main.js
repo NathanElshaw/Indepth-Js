@@ -49,14 +49,15 @@ module.exports = {
     let n = input.length;
     for (let i = 0; i < n; i++) {
       let char = input.charAt(i);
-      if (char == " ") {
-        result = result.concat(" ");
-      } else if (Alph.indexOf(char) == -1) {
+      const getLetter = (char) => {
+        return Alph[Alph.indexOf(char) + offset];
+      };
+      if (Alph.indexOf(char) == -1) {
         result = result.concat(char);
       } else if (char === char.toUpperCase()) {
-        result = result.concat(Alph[Alph.indexOf(char) + offset].toUpperCase());
+        result = result.concat(getLetter(char).toUpperCase());
       } else {
-        result = result.concat(Alph[Alph.indexOf(input.charAt(i)) + offset]);
+        result = result.concat(getLetter(char));
       }
     }
     return result;
