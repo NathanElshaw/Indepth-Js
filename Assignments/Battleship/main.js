@@ -1,15 +1,18 @@
-const ships = (name, size, isHit, isSunk) => {
+const ships = (name, size) => {
   this.name = name;
   this.size = size;
-  this.isHit = isHit;
-  this.isSunk = isSunk;
+  this.isHit = 0;
+  this.isSunk = false;
 
-  return {
-    name: this.name,
-    size: this.size,
-    isHit: this.isHit,
-    isSunk: this.isSunk,
-  };
+  function hit() {
+    this.isHit++;
+  }
+
+  function isSunk(isHit) {
+    isHit == this.size ? (this.isSunk = true) : false;
+  }
+
+  return { hit, isSunk };
 };
-
-console.log(ships("Battleship", 4, false, false));
+ships("Battleship", 4);
+console.log(ships().hit());
