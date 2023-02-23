@@ -7,9 +7,11 @@ class gameBoard {
     //Creates a game board from scratch
     const board = this.gameBoard;
     const makeBoard = () => {
-      const norm = { state: "empty" };
       let arr = [];
       for (let i = 0; i < 100; i++) {
+        let norm = {
+          state: "empty",
+        };
         arr.push(norm);
       }
       this.gameBoard = arr;
@@ -22,6 +24,47 @@ class gameBoard {
     board.forEach((mark) => {
       mark.state = "empty";
     });
+  }
+
+  placeShip(name, size, start, vertical) {
+    let first = start;
+    const placeVert = () => {
+      if (
+        first - 11 < 0 ||
+        first - 21 < 0 ||
+        first - 31 < 0 ||
+        first - 41 < 0
+      ) {
+        return "Invalid Placement";
+      } else {
+        for (let i = 0; i < size; i++) {
+          this.gameBoard[first - 1] = {
+            placeholder: "ship",
+            id: name,
+          };
+          first = first - 10;
+        }
+      }
+    };
+
+    const placeHorz = () => {
+      for (let i = 0; i < size; i++) {
+        if (first - 1 < 0) {
+          break;
+        } else {
+          this.gameBoard[first - 1] = {
+            placeholder: "ship",
+            id: name,
+          };
+        }
+        first = first + 1;
+      }
+    };
+    if (vertical !== true) {
+      return placeHorz();
+    } else {
+      return placeVert();
+    }
   }
 }
 
