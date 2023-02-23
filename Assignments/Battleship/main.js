@@ -20,6 +20,7 @@ class gameBoard {
   }
 
   clearBoard() {
+    //Sets board state to "empty" or defualt
     const board = this.gameBoard;
     board.forEach((mark) => {
       mark.state = "empty";
@@ -27,6 +28,7 @@ class gameBoard {
   }
 
   placeShip(name, size, start, vertical) {
+    // determins if the palcement is vertical or horizontal and check to see if the placement is invalid if not then places the ship
     let first = start;
     const placeVert = () => {
       if (
