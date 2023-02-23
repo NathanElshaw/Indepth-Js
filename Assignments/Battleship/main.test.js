@@ -35,27 +35,27 @@ describe("#placeShip", () => {
     expect(game.gameBoard[13].id).toBe("battleShip");
   });
 });
-// describe("#placeShip", () => {
-//   test("Places a ship on the board and changes state of piece vertically", () => {
-//     const game = new gameBoard();
-//     const ship = new ships();
-//     game.createBoard();
-//     game.placeShip("battleShip", 4, 41, true);
-//     expect(game.gameBoard[40].id).toBe("battleShip");
-//     expect(game.gameBoard[30].id).toBe("battleShip");
-//     expect(game.gameBoard[20].id).toBe("battleShip");
-//     expect(game.gameBoard[10].id).toBe("battleShip");
-//   });
-// });
-// describe("#placeShip", () => {
-//   test("Places a ship on the board and changes state of piece invalid", () => {
-//     const game = new gameBoard();
-
-//     game.createBoard();
-//     game.placeShip("battleShip", 4, 10, true);
-//     expect(game.placeShip("battleShip", 4, 10, true)).toBe("Invalid Placement");
-//   });
-// });
+describe("#placeShip", () => {
+  test("Places a ship on the board and changes state of piece vertically", () => {
+    const game = new gameBoard();
+    const ship = new ships();
+    game.createBoard();
+    ship.placeShip("battleShip", 4, 41, true, game.gameBoard);
+    expect(game.gameBoard[40].id).toBe("battleShip");
+    expect(game.gameBoard[30].id).toBe("battleShip");
+    expect(game.gameBoard[20].id).toBe("battleShip");
+    expect(game.gameBoard[10].id).toBe("battleShip");
+  });
+});
+describe("#placeShip", () => {
+  test("Places a ship on the board and changes state of piece invalid", () => {
+    const game = new gameBoard();
+    const ship = new ships();
+    game.createBoard();
+    ship.placeShip("battleShip", 4, 10, true, game.gameBoard);
+    expect(ship.placeShip("battleShip", 4, 10, true)).toBe("Invalid Placement");
+  });
+});
 describe("#turns", () => {
   test("returns players", () => {
     const turn = new turns("New Player");
