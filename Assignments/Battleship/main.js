@@ -1,18 +1,28 @@
-const ships = (name, size) => {
-  this.name = name;
-  this.size = size;
-  this.isHit = 0;
-  this.isSunk = false;
-
-  function hit() {
-    this.isHit++;
+class gameBoard {
+  constructor(board) {
+    this.gameBoard = board || null;
   }
 
-  function isSunk(isHit) {
-    isHit == this.size ? (this.isSunk = true) : false;
+  createBoard() {
+    //Creates a game board from scratch
+    const board = this.gameBoard;
+    const makeBoard = () => {
+      const norm = { state: "empty" };
+      let arr = [];
+      for (let i = 0; i < 100; i++) {
+        arr.push(norm);
+      }
+      this.gameBoard = arr;
+    };
+    board === null ? makeBoard() : {};
   }
 
-  return { hit, isSunk };
-};
-ships("Battleship", 4);
-console.log(ships().hit());
+  clearBoard() {
+    const board = this.gameBoard;
+    board.forEach((mark) => {
+      mark.state = "empty";
+    });
+  }
+}
+
+module.exports = gameBoard;
