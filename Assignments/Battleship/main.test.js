@@ -63,3 +63,38 @@ describe("#turns", () => {
     expect(turn.turnPlayer).toBe("New Player");
   });
 });
+
+describe("#recieveAttack", () => {
+  test("checks for a hit", () => {
+    const game = new gameBoard();
+    const ship = new ships();
+    game.createBoard();
+    ship.placeShip("battleShip", 4, 41, true, game.gameBoard);
+    expect(game.receiveAttack(40)).toBe("hit");
+    expect(game.gameBoard[40]).toMatchObject({
+      placeholder: "hit",
+      id: "battleShip",
+    });
+  });
+});
+describe("#recieveAttack", () => {
+  test("checks for a hit", () => {
+    const game = new gameBoard();
+    const ship = new ships();
+    game.createBoard();
+    ship.placeShip("battleShip", 4, 41, true, game.gameBoard);
+    expect(game.receiveAttack(41)).toBe("miss");
+  });
+});
+describe("#recieveAttack", () => {
+  test("checks for a hit", () => {
+    const game = new gameBoard();
+    const ship = new ships();
+    game.createBoard();
+    ship.placeShip("battleShip", 4, 41, true, game.gameBoard);
+    expect(game.receiveAttack(40)).toBe("hit");
+    expect(game.receiveAttack(30)).toBe("hit");
+    expect(game.receiveAttack(20)).toBe("hit");
+    expect(game.receiveAttack(10)).toBe("sunk");
+  });
+});
