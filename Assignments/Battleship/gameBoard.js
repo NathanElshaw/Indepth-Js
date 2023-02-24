@@ -40,9 +40,13 @@ class gameBoard {
         let check = this.gameBoard.filter(
           (item) => item.id == this.gameBoard[mark].id
         );
-
-        console.log(check.findIndex({ placeholder: "ship" }));
-        if (1 + 1 == 3) {
+        let isSunk = true;
+        check.forEach((check) => {
+          if (check.placeholder == "ship") {
+            return (isSunk = false);
+          }
+        });
+        if (isSunk == true) {
           return "sunk";
         } else {
           return "hit";
