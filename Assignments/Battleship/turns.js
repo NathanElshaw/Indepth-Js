@@ -1,5 +1,7 @@
 const gameBoard = require("./gameBoard.js");
+const comp = require("./comp.js");
 const board = new gameBoard();
+const ai = new comp();
 
 class turns {
   constructor(player, player2) {
@@ -15,7 +17,7 @@ class turns {
 
   turn(placement, player1, player2) {
     player1 == "ai" ? this.aiMove() : (player1 = player1);
-    board.receiveAttack(placement, player2) == "hit" ? "hit" : this.aiLogic;
+    board.receiveAttack(placement, player2) == "hit" ? "hit" : ai.attack;
   }
 }
 

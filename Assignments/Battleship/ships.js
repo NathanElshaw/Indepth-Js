@@ -28,47 +28,40 @@ class ships {
   placeShip(name, size, start, vertical, board) {
     // determins if the palcement is vertical or horizontal and check to see if the placement is invalid if not then places the ship
     let first = start;
+    const invalid = () => {
+      return "Invalid Placement";
+    };
+    const insert = (num) => {
+      board[first - 1] = {
+        placeholder: "ship",
+        id: name,
+      };
+      first = first - num;
+    };
     const placeVert = () => {
-      if (first - 10 * size - 1 < 0) {
-        return "Invalid Placement";
-      } else {
-        for (let i = 0; i < size; i++) {
-          if (board[first - 1].placeholder == "ship") {
-            return "Invalid Placement";
-          } else {
-            board[first - 1] = {
-              placeholder: "ship",
-              id: name,
-            };
-
-            first = first - 10;
-          }
-        }
+      for (let i = 0; i < size; i++) {
+        insert(10);
       }
     };
 
     const placeHorz = () => {
-      if (board[first - 1].placeholder == "ship") {
-        return "Invalid Placement";
-      } else {
-        for (let i = 0; i < size; i++) {
-          if (first - 1 < 0) {
-            break;
-          } else {
-            board[first - 1] = {
-              placeholder: "ship",
-              id: name,
-            };
-          }
-          first = first + 1;
+      for (let i = 0; i < size; i++) {
+        if (first - 1 < 0) {
+          break;
+        } else {
+          insert(-1);
         }
       }
     };
-    if (vertical !== true) {
-      return placeHorz();
-    } else {
-      return placeVert();
-    }
+    return vertical !== true
+      ? board[first - 1].placeholder == "ship"
+        ? invalid()
+        : placeHorz()
+      : first - 10 * size - 1 < 0
+      ? invalid()
+      : board[first - 1].placeholder == "ship"
+      ? invalid
+      : placeVert();
   }
 }
 

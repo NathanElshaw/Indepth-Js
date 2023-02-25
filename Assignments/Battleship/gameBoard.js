@@ -30,32 +30,29 @@ class gameBoard {
   }
 
   receiveAttack(mark) {
-    if (this.gameBoard[mark].state == "empty") {
-      this.gameBoard[mark].state = "miss";
-      return "miss";
-    } else {
+    const hit = () => {
       this.gameBoard[mark] = {
         placeholder: "hit",
         id: this.gameBoard[mark].id,
       };
-      const sunkCheck = () => {
-        let check = this.gameBoard.filter(
-          (item) => item.id == this.gameBoard[mark].id
-        );
-        let isSunk = true;
-        check.forEach((check) => {
-          if (check.placeholder == "ship") {
-            return (isSunk = false);
-          }
-        });
-        if (isSunk == true) {
-          return "sunk";
-        } else {
-          return "hit";
-        }
-      };
       return sunkCheck();
-    }
+    };
+    const miss = () => {
+      this.gameBoard[mark].state = "miss";
+      return "miss";
+    };
+
+    const sunkCheck = () => {
+      let check = this.gameBoard.filter(
+        (item) => item.id == this.gameBoard[mark].id
+      );
+      let isSunk = true;
+      check.forEach((check) => {
+        return check.placeholder == "ship" ? (isSunk = false) : {};
+      });
+      return isSunk == true ? "sunk" : "hit";
+    };
+    return this.gameBoard[mark].state == "empty" ? miss() : hit();
   }
 }
 
