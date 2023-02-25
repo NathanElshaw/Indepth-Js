@@ -1,10 +1,17 @@
 class turns {
-  constructor(player) {
-    this.turnPlayer = player || null;
+  constructor(player, player2) {
+    this.player1 = player || null;
+    this.player2 = player2 || null
   }
 
   init(player) {
     this.turnPlayer == null ? (this.turnPlayer = player) : {};
+  }
+
+  initAi(){
+    aiActive == true ? {
+      this.player2 = "ai"
+    }
   }
 
   turn(placement, player1, player2) {
@@ -15,14 +22,6 @@ class turns {
     }
   }
 
-  fire(placement, player2) {
-    if (gameBoard.gameBoard[placement] == "ship") {
-      this.checkSink();
-      return "hit";
-    } else {
-      return "miss";
-    }
-  }
 }
 
 module.exports = turns;
