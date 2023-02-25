@@ -34,7 +34,7 @@ class gameBoard {
   receiveAttack(mark) {
     const hit = () => {
       this.gameBoard[mark] = {
-        placeholder: "hit",
+        state: "hit",
         id: this.gameBoard[mark].id,
       };
       return sunkCheck();
@@ -50,7 +50,7 @@ class gameBoard {
       );
       let isSunk = true;
       check.forEach((check) => {
-        return check.placeholder == "ship" ? (isSunk = false) : {};
+        return check.state == "ship" ? (isSunk = false) : {};
       });
       return isSunk == true ? "sunk" : "hit";
     };

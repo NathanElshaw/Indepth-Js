@@ -33,7 +33,7 @@ class ships {
     };
     const insert = (num) => {
       board[first - 1] = {
-        placeholder: "ship",
+        state: "ship",
         id: name,
       };
       first = first - num;
@@ -54,12 +54,12 @@ class ships {
       }
     };
     return vertical !== true
-      ? board[first - 1].placeholder == "ship"
+      ? board[first - 1].state == "ship"
         ? invalid()
         : placeHorz()
       : first - 10 * size - 1 < 0
       ? invalid()
-      : board[first - 1].placeholder == "ship"
+      : board[first - 1].state == "ship"
       ? invalid
       : placeVert();
   }

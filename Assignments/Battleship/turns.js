@@ -16,9 +16,15 @@ class turns {
   }
 
   turn(placement, player1, player2) {
-    player1 == "ai" ? this.aiMove() : (player1 = player1);
-    board.receiveAttack(placement, player2) == "hit" ? "hit" : ai.attack;
+    player1 == "ai" ? ai.attack : null;
+    board.receiveAttack(placement, player2) == "sunk"
+      ? player1.score++
+      : board.receiveAttack(placement, player2) == "hit"
+      ? "hit"
+      : this.turn(ai.makeMove, "ai", player1);
   }
+
+  checkWinner() {}
 }
 
 module.exports = turns;

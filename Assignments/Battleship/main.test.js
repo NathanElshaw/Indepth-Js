@@ -73,7 +73,7 @@ describe("#recieveAttack", () => {
     ship.placeShip("battleShip", 4, 41, true, game.gameBoard);
     expect(game.receiveAttack(40)).toBe("hit");
     expect(game.gameBoard[40]).toMatchObject({
-      placeholder: "hit",
+      state: "hit",
       id: "battleShip",
     });
   });
@@ -165,6 +165,7 @@ describe("#turn", () => {
     expect(ai.attack(40, game)).toBe("hit");
   });
 });
+
 describe("#turn", () => {
   test("check if the ai will sink a ship", () => {
     const game = new gameBoard();
@@ -177,5 +178,20 @@ describe("#turn", () => {
     expect(ai.attack(30, game)).toBe("hit");
     expect(ai.attack(20, game)).toBe("hit");
     expect(ai.attack(10, game)).toBe("sunk");
+  });
+});
+
+describe("#makeMove", () => {
+  test("get a list of avalible targets", () => {
+    const game = new gameBoard();
+    const ship = new ships();
+    const ai = new comp();
+    game.createBoard();
+    ship.placeShip("battleShip", 4, 41, true, game.gameBoard);
+    ai.attack(40, game);
+    ai.attack(30, game);
+    ai.attack(20, game);
+    console.log(ai.makeMove(game.gameBoard))
+    expect(ai.makeMove(game.gameBoard)).toBe(96);
   });
 });
