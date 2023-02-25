@@ -1,11 +1,11 @@
 class gameBoard {
   constructor(board) {
     this.gameBoard = board || null;
+    this.aiGameboard = board || null;
   }
 
   createBoard() {
     //Creates a game board from scratch
-    const board = this.gameBoard;
     const makeBoard = () => {
       let arr = [];
       for (let i = 0; i < 100; i++) {
@@ -15,8 +15,10 @@ class gameBoard {
         arr.push(norm);
       }
       this.gameBoard = arr;
+      this.aiGameboard = arr;
     };
-    board === null ? makeBoard() : {};
+    this.gameBoard === null ? makeBoard() : {};
+    this.aiGameboard === null ? makeBoard() : {};
   }
 
   clearBoard() {

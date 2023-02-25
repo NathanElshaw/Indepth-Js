@@ -1,3 +1,6 @@
+const gameBoard = require("./gameBoard.js");
+const board = new gameBoard();
+
 class turns {
   constructor(player, player2) {
     this.currentPlayer = null;
@@ -6,24 +9,13 @@ class turns {
   }
 
   init(player1, player2) {
-    this.turnPlayer == null ? (this.player = player) : null;
-  }
-
-  initAi(aiActive) {
-    aiActive == true ? (this.player2 = "ai") : null;
-  }
-
-  promptTurn(player) {
-    return `Its ${player}'s turn`;
+    this.player1 == null ? (this.player1 = player1) : null;
+    this.player2 == null ? (this.player2 = player2) : null;
   }
 
   turn(placement, player1, player2) {
     player1 == "ai" ? this.aiMove() : (player1 = player1);
-    if (this.fire(placement) == "hit") {
-      this.promptTurn(player1);
-    } else {
-      this.promptTurn(player2);
-    }
+    board.receiveAttack(placement, player2) == "hit" ? "hit" : this.aiLogic;
   }
 }
 

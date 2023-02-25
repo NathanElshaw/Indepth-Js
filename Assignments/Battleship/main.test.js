@@ -1,6 +1,7 @@
 const gameBoard = require("./gameBoard.js");
 const turns = require("./turns.js");
 const ships = require("./ships.js");
+const comp = require("./comp.js");
 
 describe("#createBoard", () => {
   test("given a blank board it makes a board array with 100 spaces", () => {
@@ -60,7 +61,7 @@ describe("#turns", () => {
   test("returns players", () => {
     const turn = new turns("New Player");
 
-    expect(turn.turnPlayer).toBe("New Player");
+    expect(turn.player1).toBe("New Player");
   });
 });
 
@@ -96,5 +97,59 @@ describe("#recieveAttack", () => {
     expect(game.receiveAttack(30)).toBe("hit");
     expect(game.receiveAttack(20)).toBe("hit");
     expect(game.receiveAttack(10)).toBe("sunk");
+  });
+});
+
+describe("#aiGameboard", () => {
+  test("Make an Ai gameboard", () => {
+    const game = new gameBoard();
+    game.createBoard();
+
+    expect(game.aiGameboard.length).toBe(100);
+  });
+});
+
+describe("#aiPlaceShip", () => {
+  test("ai places ship down", () => {
+    const board = new gameBoard();
+    const aiShip = new ships("ai");
+    board.createBoard();
+    const ai = new comp();
+    ai.placeShips(
+      aiShip.ships[0].name,
+      aiShip.ships[0].size,
+      10,
+      false,
+      board.aiGameboard
+    );
+    expect(board.aiGameboard[9].id).toBe("Carrier");
+    expect(board.aiGameboard[10].id).toBe("Carrier");
+    expect(board.aiGameboard[11].id).toBe("Carrier");
+    expect(board.aiGameboard[12].id).toBe("Carrier");
+    expect(board.aiGameboard[13].id).toBe("Carrier");
+  });
+});
+describe("#aiPlaceShip", () => {
+  test("checks invalid", () => {
+    const board = new gameBoard();
+    const aiShip = new ships("ai");
+    board.createBoard();
+    const ai = new comp();
+    ai.placeShips(
+      aiShip.ships[0].name,
+      aiShip.ships[0].size,
+      10,
+      false,
+      board.aiGameboard
+    );
+    expect(
+      ai.placeShips(
+        aiShip.ships[2].name,
+        aiShip.ships[2].size,
+        10,
+        false,
+        board.aiGameboard
+      )
+    ).toBe("Invalid Placement");
   });
 });

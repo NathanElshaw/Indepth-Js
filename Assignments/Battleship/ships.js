@@ -1,5 +1,5 @@
 class ships {
-  constructor(owner, ship) {
+  constructor(owner) {
     this.owner = owner;
     this.ships = [
       {
@@ -33,27 +33,35 @@ class ships {
         return "Invalid Placement";
       } else {
         for (let i = 0; i < size; i++) {
-          board[first - 1] = {
-            placeholder: "ship",
-            id: name,
-          };
+          if (board[first - 1].placeholder == "ship") {
+            return "Invalid Placement";
+          } else {
+            board[first - 1] = {
+              placeholder: "ship",
+              id: name,
+            };
 
-          first = first - 10;
+            first = first - 10;
+          }
         }
       }
     };
 
     const placeHorz = () => {
-      for (let i = 0; i < size; i++) {
-        if (first - 1 < 0) {
-          break;
-        } else {
-          board[first - 1] = {
-            placeholder: "ship",
-            id: name,
-          };
+      if (board[first - 1].placeholder == "ship") {
+        return "Invalid Placement";
+      } else {
+        for (let i = 0; i < size; i++) {
+          if (first - 1 < 0) {
+            break;
+          } else {
+            board[first - 1] = {
+              placeholder: "ship",
+              id: name,
+            };
+          }
+          first = first + 1;
         }
-        first = first + 1;
       }
     };
     if (vertical !== true) {
