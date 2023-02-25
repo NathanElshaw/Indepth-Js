@@ -153,3 +153,15 @@ describe("#aiPlaceShip", () => {
     ).toBe("Invalid Placement");
   });
 });
+
+describe("#turn", () => {
+  test("check if the ai will hit a ship", () => {
+    const game = new gameBoard();
+    const ship = new ships();
+    const ai = new comp();
+    game.createBoard();
+    ship.placeShip("battleShip", 4, 41, true, game.gameBoard);
+
+    expect(ai.attack(40, game)).toBe("hit");
+  });
+});
