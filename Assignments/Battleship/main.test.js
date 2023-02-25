@@ -165,3 +165,17 @@ describe("#turn", () => {
     expect(ai.attack(40, game)).toBe("hit");
   });
 });
+describe("#turn", () => {
+  test("check if the ai will sink a ship", () => {
+    const game = new gameBoard();
+    const ship = new ships();
+    const ai = new comp();
+    game.createBoard();
+    ship.placeShip("battleShip", 4, 41, true, game.gameBoard);
+
+    expect(ai.attack(40, game)).toBe("hit");
+    expect(ai.attack(30, game)).toBe("hit");
+    expect(ai.attack(20, game)).toBe("hit");
+    expect(ai.attack(10, game)).toBe("sunk");
+  });
+});

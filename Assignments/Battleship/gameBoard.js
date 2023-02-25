@@ -1,3 +1,5 @@
+const ships = require("./ships.js");
+
 class gameBoard {
   constructor(board) {
     this.gameBoard = board || null;
