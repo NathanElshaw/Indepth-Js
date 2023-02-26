@@ -1,5 +1,3 @@
-const ships = require("./ships.js");
-
 class gameBoard {
   constructor(board) {
     this.gameBoard = board || null;
@@ -57,5 +55,4 @@ class gameBoard {
     return this.gameBoard[mark].state == "empty" ? miss() : hit();
   }
 }
-
-module.exports = gameBoard;
+export default gameBoard;

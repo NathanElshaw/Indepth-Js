@@ -64,5 +64,4 @@ class ships {
       : placeVert();
   }
 }
-
-module.exports = ships;
+export default ships;

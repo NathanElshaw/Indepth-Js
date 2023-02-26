@@ -1,5 +1,5 @@
-const gameBoard = require("./gameBoard.js");
-const comp = require("./comp.js");
+import gameBoard from "./gameBoard.js";
+import comp from "./comp.js";
 const board = new gameBoard();
 const ai = new comp();
 
@@ -26,5 +26,4 @@ class turns {
 
   checkWinner() {}
 }
-
-module.exports = turns;
+export default turns;

@@ -1,6 +1,4 @@
-//const gameBoard = require("./gameBoard.js");
-const ships = require("./ships.js");
-//const board = new gameBoard();
+import ships from "./ships.js";
 const facShips = new ships("ai");
 
 class Ai {
@@ -27,5 +25,4 @@ class Ai {
     return board.receiveAttack(mark);
   }
 }
-
-module.exports = Ai;
+export default Ai;
