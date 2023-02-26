@@ -8,10 +8,14 @@ const board = new gameBoard();
 const ship = new ships();
 const turn = new turns();
 
-const player = document.querySelector("#player1board");
+const player = document.querySelector("#player1Board");
+const aiBoard = document.querySelector("#aiBoard");
 
 board.createBoard();
-console.log(board.gameBoard.state);
 board.gameBoard.forEach((tile) => {
-  player.innerHTML += `<div> ${tile.state} </div>`;
+  player.innerHTML += `<div class="tile">  </div>`;
+});
+
+board.aiGameboard.forEach((tile) => {
+  aiBoard.innerHTML += `<div class="tile">  </div>`;
 });
