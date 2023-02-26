@@ -182,16 +182,16 @@ describe("#turn", () => {
 });
 
 describe("#makeMove", () => {
-  test("get a list of avalible targets", () => {
+  test("take a turn", () => {
     const game = new gameBoard();
     const ship = new ships();
     const ai = new comp();
     game.createBoard();
     ship.placeShip("battleShip", 4, 41, true, game.gameBoard);
+    ship.placeShip("carrier", 4, 70, false, game.gameBoard);
     ai.attack(40, game);
     ai.attack(30, game);
     ai.attack(20, game);
-    console.log(ai.makeMove(game.gameBoard))
-    expect(ai.makeMove(game.gameBoard)).toBe(96);
+    expect(ai.makeMove(game)).toBe("miss" || "hit" || "sunk");
   });
 });
