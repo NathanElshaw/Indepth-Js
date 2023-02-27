@@ -13,19 +13,23 @@ const aiBoard = document.querySelector("#aiBoard");
 
 board.createBoard();
 board.gameBoard.forEach((tile) => {
-  player.innerHTML += `<div class="tile">  </div>`;
+  player.innerHTML += `<button class="tile">  </button>`;
 });
 
 board.aiGameboard.forEach((tile) => {
-  aiBoard.innerHTML += `<div class="tile" id="ai" value="${board.aiGameboard.indexOf(
+  aiBoard.innerHTML += `<button class="tile" id="aiTile" value=${board.aiGameboard.indexOf(
     tile
-  )}">  </div>`;
+  )}>  </button>`;
 });
 
-const aiTiles = document.querySelectorAll("#ai");
+const aiTiles = document.querySelectorAll("#aiTile");
 
 aiTiles.forEach((tile) => {
   tile.addEventListener("click", () => {
-    console.log("click", tile.value);
+    console.log(attackAi());
   });
 });
+
+function attackAi(num) {
+  turn.turn(num, "Player 1", "Ai");
+}
