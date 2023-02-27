@@ -17,5 +17,15 @@ board.gameBoard.forEach((tile) => {
 });
 
 board.aiGameboard.forEach((tile) => {
-  aiBoard.innerHTML += `<div class="tile">  </div>`;
+  aiBoard.innerHTML += `<div class="tile" id="ai" value="${board.aiGameboard.indexOf(
+    tile
+  )}">  </div>`;
+});
+
+const aiTiles = document.querySelectorAll("#ai");
+
+aiTiles.forEach((tile) => {
+  tile.addEventListener("click", () => {
+    console.log("click", tile.value);
+  });
 });
