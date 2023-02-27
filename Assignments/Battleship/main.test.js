@@ -79,7 +79,7 @@ describe("#recieveAttack", () => {
   });
 });
 describe("#recieveAttack", () => {
-  test("checks for a hit", () => {
+  test("checks for a miss", () => {
     const game = new gameBoard();
     const ship = new ships();
     game.createBoard();

@@ -6,12 +6,13 @@ import turns from "./turns.js";
 const ai = new comp();
 const board = new gameBoard();
 const ship = new ships();
-const turn = new turns();
+const gamePlayers = new turns("Player1", "Ai");
 
 const player = document.querySelector("#player1Board");
 const aiBoard = document.querySelector("#aiBoard");
-
+console.log(gamePlayers.player1, gamePlayers.player2);
 board.createBoard();
+
 board.gameBoard.forEach((tile) => {
   player.innerHTML += `<button class="tile">  </button>`;
 });
@@ -19,17 +20,9 @@ board.gameBoard.forEach((tile) => {
 board.aiGameboard.forEach((tile) => {
   aiBoard.innerHTML += `<button class="tile" id="aiTile" value=${board.aiGameboard.indexOf(
     tile
-  )}>  </button>`;
+  )} onClick=${gamePlayers.turn(
+    board.aiGameboard.indexOf(tile),
+    gamePlayers.player1,
+    gamePlayers.player2
+  )};>  </button>`;
 });
-
-const aiTiles = document.querySelectorAll("#aiTile");
-
-aiTiles.forEach((tile) => {
-  tile.addEventListener("click", () => {
-    console.log(attackAi());
-  });
-});
-
-function attackAi(num) {
-  turn.turn(num, "Player 1", "Ai");
-}
