@@ -8,7 +8,7 @@ class gameBoard {
     //Creates a game board from scratch
     const makeBoard = () => {
       let arr = [];
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 49; i++) {
         let norm = {
           state: "empty",
         };
