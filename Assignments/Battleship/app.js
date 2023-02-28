@@ -9,6 +9,7 @@ const playerBoard = document.querySelector("#player1Board");
 const aiBoard = document.querySelector("#aiBoard");
 const game = new board();
 const players = new turns();
+const ship = new ships();
 
 function displayBoards() {
   let j = 0;
@@ -18,8 +19,15 @@ function displayBoards() {
   });
   let i = 0;
   game.aiGameboard.forEach(() => {
-    aiBoard.innerHTML += `<button class=tile id=aiTile>${i}</button>`;
+    aiBoard.innerHTML += `<button class=tile id=aiTile value=${i}>${i}</button>`;
     i++;
+  });
+  ship.placeShip("battleShip", 4, 10, false, game.aiGameboard);
+  const aitile = document.querySelectorAll("#aiTile");
+  aitile.forEach((tile) => {
+    tile.addEventListener("click", () => {
+      console.log(game.receiveAttack(tile.value));
+    });
   });
 }
 
