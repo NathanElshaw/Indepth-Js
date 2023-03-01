@@ -11,6 +11,7 @@ class gameBoard {
       for (let i = 0; i < 49; i++) {
         let norm = {
           state: str,
+          value: i,
         };
         arr.push(norm);
       }
@@ -33,6 +34,7 @@ class gameBoard {
       this.aiGameboard[mark] = {
         state: "hit",
         id: this.aiGameboard[mark].id,
+        value: this.aiGameboard[mark].value,
       };
       return sunkCheck();
     };
@@ -55,9 +57,10 @@ class gameBoard {
   }
   receiveAttackAi(mark) {
     const hit = () => {
-      this.aiGameboard[mark] = {
+      this.gameBoard[mark] = {
         state: "hit",
-        id: this.aiGameboard[mark].id,
+        id: this.gameBoard[mark].id,
+        value: this.gameBoard[mark].value,
       };
       return sunkCheck();
     };

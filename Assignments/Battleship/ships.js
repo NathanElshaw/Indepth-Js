@@ -38,6 +38,7 @@ class ships {
       ref[first - 1] = {
         state: "ship",
         id: name,
+        value: ref[first - 1].value,
       };
       first = first - num;
     };

@@ -5,7 +5,6 @@ const ai = new comp();
 
 class turns {
   constructor(player, player2) {
-    this.currentPlayer = null;
     this.player1 = player || null;
     this.player2 = player2 || null;
   }
@@ -17,9 +16,9 @@ class turns {
 
   turn(placement, player1, player2) {
     player1 == "ai" ? ai.attack : null;
-    board.receiveAttack(placement, player2) == "sunk"
+    board.receiveAttack(placement) == "sunk"
       ? player1.score++
-      : board.receiveAttack(placement, player2) == "hit"
+      : board.receiveAttack(placement) == "hit"
       ? "hit"
       : this.turn(ai.makeMove, "ai", player1);
   }

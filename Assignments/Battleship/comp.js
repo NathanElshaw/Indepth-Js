@@ -1,7 +1,5 @@
 import ships from "./ships.js";
-import game from "./gameBoard.js";
 const facShips = new ships("ai");
-const games = new game();
 
 class Ai {
   constructor() {
@@ -16,18 +14,19 @@ class Ai {
     let available = [];
     board.gameBoard.forEach((tile) => {
       tile.state === `ship` || tile.state === `empty`
-        ? available.push(board.gameBoard.indexOf(tile))
+        ? available.push(tile.value)
         : null;
     });
-    let mark = Math.floor(Math.random() * available.length);
+    let mark = available[Math.floor(Math.random() * available.length)];
+    console.log(available);
     return {
       response: this.attack(available[mark], board),
-      place: mark,
+      place: `${mark}`,
     };
   }
 
-  attack(mark) {
-    return games.receiveAttackAi(mark);
+  attack(mark, board) {
+    return board.receiveAttackAi(mark);
   }
 }
 export default Ai;

@@ -18,8 +18,12 @@ function displayBoards() {
   ship.placeShip("battleShip", 4, 10, false, "ai", game);
   const miss = (ref) => {
     ref.classList.add("miss");
-    //const move = ai.makeMove(game);
-    //playerTile[move.place].classList.add(move.response);
+    const move = ai.makeMove(game);
+    for (let i = 0; i < playerTile.length; i++) {
+      playerTile[i].value == move.place
+        ? playerTile[i].classList.add(move.response)
+        : null;
+    }
   };
   let j = 0;
   game.gameBoard.forEach(() => {
@@ -37,7 +41,6 @@ function displayBoards() {
   aiTile.forEach((tile) => {
     tile.addEventListener("click", () => {
       const attack = game.receiveAttackPlayer(tile.value);
-      console.log(attack);
       attack == "miss"
         ? miss(tile)
         : attack == "hit" || attack == "sunk"
