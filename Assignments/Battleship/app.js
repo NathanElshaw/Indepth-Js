@@ -10,8 +10,13 @@ const aiBoard = document.querySelector("#aiBoard");
 const game = new board();
 const players = new turns();
 const ship = new ships();
+const ai = new comp();
 
 function displayBoards() {
+  const miss = (ref) => {
+    ref.classList.add("miss");
+    console.log(ai.makeMove(game));
+  };
   let j = 0;
   game.gameBoard.forEach(() => {
     playerBoard.innerHTML += `<button class=tile>${j}</button>`;
@@ -26,7 +31,12 @@ function displayBoards() {
   const aitile = document.querySelectorAll("#aiTile");
   aitile.forEach((tile) => {
     tile.addEventListener("click", () => {
-      console.log(game.receiveAttack(tile.value));
+      game.receiveAttack(tile.value) == "miss"
+        ? miss(tile)
+        : game.receiveAttack(tile.value) == "hit" ||
+          game.receiveAttack(tile.value) == "sunk"
+        ? tile.classList.add("hit")
+        : null;
     });
   });
 }
