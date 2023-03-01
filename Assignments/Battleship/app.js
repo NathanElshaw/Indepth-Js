@@ -34,10 +34,10 @@ function displayBoards() {
   const aitile = document.querySelectorAll("#aiTile");
   aitile.forEach((tile) => {
     tile.addEventListener("click", () => {
-      game.receiveAttack(tile.value) == "miss"
+      const attack = game.receiveAttack(tile.value, game);
+      attack == "miss"
         ? miss(tile)
-        : game.receiveAttack(tile.value) == "hit" ||
-          game.receiveAttack(tile.value) == "sunk"
+        : attack == "hit" || attack == "sunk"
         ? tile.classList.add("hit")
         : null;
     });
