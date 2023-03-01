@@ -6,19 +6,18 @@ class gameBoard {
 
   createBoard() {
     //Creates a game board from scratch
-    const makeBoard = () => {
+    const makeBoard = (str) => {
       let arr = [];
       for (let i = 0; i < 49; i++) {
         let norm = {
-          state: "empty",
+          state: str,
         };
         arr.push(norm);
       }
-      this.gameBoard = arr;
-      this.aiGameboard = arr;
+      return arr;
     };
-    this.gameBoard === null ? makeBoard() : {};
-    this.aiGameboard === null ? makeBoard() : {};
+    this.gameBoard === null ? (this.gameBoard = makeBoard("empty")) : {};
+    this.aiGameboard === null ? (this.aiGameboard = makeBoard("empty")) : {};
   }
 
   clearBoard() {
@@ -29,11 +28,36 @@ class gameBoard {
     });
   }
 
-  receiveAttack(mark) {
+  receiveAttackPlayer(mark) {
     const hit = () => {
-      this.gameBoard[mark] = {
+      this.aiGameboard[mark] = {
         state: "hit",
-        id: this.gameBoard[mark].id,
+        id: this.aiGameboard[mark].id,
+      };
+      return sunkCheck();
+    };
+    const miss = () => {
+      this.aiGameboard[mark].state = "miss";
+      return "miss";
+    };
+
+    const sunkCheck = () => {
+      let check = this.aiGameboard.filter(
+        (item) => item.id == this.aiGameboard[mark].id
+      );
+      let isSunk = true;
+      check.forEach((check) => {
+        return check.state == "ship" ? (isSunk = false) : {};
+      });
+      return isSunk == true ? "sunk" : "hit";
+    };
+    return this.aiGameboard[mark].state === "empty" ? miss() : hit();
+  }
+  receiveAttackAi(mark) {
+    const hit = () => {
+      this.aiGameboard[mark] = {
+        state: "hit",
+        id: this.aiGameboard[mark].id,
       };
       return sunkCheck();
     };
@@ -52,7 +76,7 @@ class gameBoard {
       });
       return isSunk == true ? "sunk" : "hit";
     };
-    return this.gameBoard[mark].state == "empty" ? miss() : hit();
+    return this.gameBoard[mark].state === "empty" ? miss() : hit();
   }
 }
 export default gameBoard;

@@ -12,11 +12,14 @@ const players = new turns();
 const ship = new ships();
 const ai = new comp();
 
+let player = "";
+
 function displayBoards() {
+  ship.placeShip("battleShip", 4, 10, false, "ai", game);
   const miss = (ref) => {
     ref.classList.add("miss");
-    let move = ai.makeMove(game);
-    playerTile[move.place].classList.add(move.response);
+    //const move = ai.makeMove(game);
+    //playerTile[move.place].classList.add(move.response);
   };
   let j = 0;
   game.gameBoard.forEach(() => {
@@ -30,11 +33,11 @@ function displayBoards() {
     aiBoard.innerHTML += `<button class=tile id=aiTile value=${i}>${i}</button>`;
     i++;
   });
-  ship.placeShip("battleShip", 4, 10, false, game.aiGameboard);
-  const aitile = document.querySelectorAll("#aiTile");
-  aitile.forEach((tile) => {
+  const aiTile = document.querySelectorAll("#aiTile");
+  aiTile.forEach((tile) => {
     tile.addEventListener("click", () => {
-      const attack = game.receiveAttack(tile.value, game);
+      const attack = game.receiveAttackPlayer(tile.value);
+      console.log(attack);
       attack == "miss"
         ? miss(tile)
         : attack == "hit" || attack == "sunk"
@@ -46,8 +49,9 @@ function displayBoards() {
 
 initGame.addEventListener("click", (event) => {
   event.preventDefault();
-  players.init(userName.value, "Ai");
   game.createBoard();
+  players.init(userName.value, "Ai");
+  player = userName.value;
   displayBoards();
 });
 

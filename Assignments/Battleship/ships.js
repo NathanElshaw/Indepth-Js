@@ -25,14 +25,17 @@ class ships {
     ];
   }
 
-  placeShip(name, size, start, vertical, board) {
+  placeShip(name, size, start, vertical, player, game) {
     // determins if the palcement is vertical or horizontal and check to see if the placement is invalid if not then places the ship
+    let ref = null;
+    player !== "ai" ? (ref = game.gameBoard) : (ref = game.aiGameboard);
+    console.log(ref);
     let first = start;
     const invalid = () => {
       return "Invalid Placement";
     };
     const insert = (num) => {
-      board[first - 1] = {
+      ref[first - 1] = {
         state: "ship",
         id: name,
       };
@@ -54,12 +57,12 @@ class ships {
       }
     };
     return vertical !== true
-      ? board[first - 1].state == "ship"
+      ? ref[first - 1].state == "ship"
         ? invalid()
         : placeHorz()
       : first - 10 * size - 1 < 0
       ? invalid()
-      : board[first - 1].state == "ship"
+      : ref[first - 1].state == "ship"
       ? invalid
       : placeVert();
   }

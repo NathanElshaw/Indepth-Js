@@ -1,5 +1,7 @@
 import ships from "./ships.js";
+import game from "./gameBoard.js";
 const facShips = new ships("ai");
+const games = new game();
 
 class Ai {
   constructor() {
@@ -24,8 +26,8 @@ class Ai {
     };
   }
 
-  attack(mark, board) {
-    return board.receiveAttack(mark);
+  attack(mark) {
+    return games.receiveAttackAi(mark);
   }
 }
 export default Ai;
