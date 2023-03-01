@@ -18,7 +18,10 @@ class Ai {
         : null;
     });
     let mark = Math.floor(Math.random() * available.length);
-    return this.attack(available[mark], board);
+    return {
+      response: this.attack(available[mark], board),
+      place: mark,
+    };
   }
 
   attack(mark, board) {

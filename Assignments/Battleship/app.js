@@ -15,13 +15,16 @@ const ai = new comp();
 function displayBoards() {
   const miss = (ref) => {
     ref.classList.add("miss");
-    console.log(ai.makeMove(game));
+    let move = ai.makeMove(game);
+    playerTile[move.place].classList.add(move.response);
   };
   let j = 0;
   game.gameBoard.forEach(() => {
-    playerBoard.innerHTML += `<button class=tile>${j}</button>`;
+    playerBoard.innerHTML += `<button class=tile id=playerTile value=${j}>${j}</button>`;
     j++;
   });
+  const playerTile = document.querySelectorAll("#playerTile");
+
   let i = 0;
   game.aiGameboard.forEach(() => {
     aiBoard.innerHTML += `<button class=tile id=aiTile value=${i}>${i}</button>`;
