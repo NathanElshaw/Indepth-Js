@@ -12,10 +12,10 @@ const players = new turns();
 const ship = new ships();
 const ai = new comp();
 
+const playerShips = [5, 4, 3, 3, 2];
 let player = "";
 
 function displayBoards() {
-  ship.placeShip("battleShip", 4, 10, false, "ai", game);
   const miss = (ref) => {
     ref.classList.add("miss");
     const move = ai.makeMove(game);
@@ -27,14 +27,14 @@ function displayBoards() {
   };
   let j = 0;
   game.gameBoard.forEach(() => {
-    playerBoard.innerHTML += `<button class=tile id=playerTile value=${j}>${j}</button>`;
+    playerBoard.innerHTML += `<div class=tile id=playerTile value=${j}>${j}</div>`;
     j++;
   });
   const playerTile = document.querySelectorAll("#playerTile");
 
   let i = 0;
   game.aiGameboard.forEach(() => {
-    aiBoard.innerHTML += `<button class=tile id=aiTile value=${i}>${i}</button>`;
+    aiBoard.innerHTML += `<div class=tile id=aiTile value=${i}>${i}</div>`;
     i++;
   });
   const aiTile = document.querySelectorAll("#aiTile");
@@ -50,12 +50,26 @@ function displayBoards() {
   });
 }
 
+function placeShips(num) {
+  const playerTile = document.querySelectorAll("#playerTile");
+  playerTile.forEach((tile) => {
+    tile.addEventListener("mouseover", () => {
+      //tile.classList.add("over");
+      console.log(playerTile[tile.value]);
+    });
+    tile.addEventListener("mouseout", () => {
+      tile.classList.remove("over");
+    });
+  });
+}
+
 initGame.addEventListener("click", (event) => {
   event.preventDefault();
   game.createBoard();
   players.init(userName.value, "Ai");
   player = userName.value;
   displayBoards();
+  placeShips();
 });
 
 check.addEventListener("click", () => {
