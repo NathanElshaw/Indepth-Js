@@ -57,7 +57,9 @@ function placeShips(num) {
     tile.addEventListener("mouseover", () => {
       for (let i = 0; i < num; i++) {
         let num = parseInt(tile.value);
-        playerTile[num + i].classList.add("over");
+        playerTile[num + i] !== undefined
+          ? playerTile[num + i].classList.add("over")
+          : null;
       }
     });
     tile.addEventListener("mouseout", () => {
@@ -65,13 +67,16 @@ function placeShips(num) {
         tile.classList.remove("over");
       });
     });
-    tile.addEventListener("click", () => {
+    tile.addEventListener("click", function placeShip() {
       for (let i = 0; i < num; i++) {
         let num = parseInt(tile.value);
+
         playerTile[num + i].classList.add("ship");
       }
+      return;
     });
   });
+  return;
 }
 
 initGame.addEventListener("click", (event) => {
@@ -81,6 +86,9 @@ initGame.addEventListener("click", (event) => {
   player = userName.value;
   displayBoards();
   placeShips(4);
+  placeShips(3);
+  placeShips(2);
+  placeShips(1);
 });
 
 check.addEventListener("click", () => {
