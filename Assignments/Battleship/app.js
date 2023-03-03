@@ -27,19 +27,20 @@ function displayBoards() {
   };
   let j = 0;
   game.gameBoard.forEach(() => {
-    playerBoard.innerHTML += `<div class=tile id=playerTile value=${j}>${j}</div>`;
+    playerBoard.innerHTML += `<button class=tile id=playerTile value=${j}>${j}</button>`;
     j++;
   });
   const playerTile = document.querySelectorAll("#playerTile");
 
   let i = 0;
   game.aiGameboard.forEach(() => {
-    aiBoard.innerHTML += `<div class=tile id=aiTile value=${i}>${i}</div>`;
+    aiBoard.innerHTML += `<button class=tile id=aiTile value=${i}>${i}</button>`;
     i++;
   });
   const aiTile = document.querySelectorAll("#aiTile");
   aiTile.forEach((tile) => {
     tile.addEventListener("click", () => {
+      console.log(tile.value);
       const attack = game.receiveAttackPlayer(tile.value);
       attack == "miss"
         ? miss(tile)
@@ -54,11 +55,21 @@ function placeShips(num) {
   const playerTile = document.querySelectorAll("#playerTile");
   playerTile.forEach((tile) => {
     tile.addEventListener("mouseover", () => {
-      //tile.classList.add("over");
-      console.log(playerTile[tile.value]);
+      for (let i = 0; i < num; i++) {
+        let num = parseInt(tile.value);
+        playerTile[num + i].classList.add("over");
+      }
     });
     tile.addEventListener("mouseout", () => {
-      tile.classList.remove("over");
+      playerTile.forEach((tile) => {
+        tile.classList.remove("over");
+      });
+    });
+    tile.addEventListener("click", () => {
+      for (let i = 0; i < num; i++) {
+        let num = parseInt(tile.value);
+        playerTile[num + i].classList.add("ship");
+      }
     });
   });
 }
@@ -69,7 +80,7 @@ initGame.addEventListener("click", (event) => {
   players.init(userName.value, "Ai");
   player = userName.value;
   displayBoards();
-  placeShips();
+  placeShips(4);
 });
 
 check.addEventListener("click", () => {
