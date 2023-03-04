@@ -51,33 +51,7 @@ function displayBoards() {
   });
 }
 
-function placeShips(num) {
-  const playerTile = document.querySelectorAll("#playerTile");
-  playerTile.forEach((tile) => {
-    tile.addEventListener("mouseover", () => {
-      for (let i = 0; i < num; i++) {
-        let num = parseInt(tile.value);
-        playerTile[num + i] !== undefined
-          ? playerTile[num + i].classList.add("over")
-          : null;
-      }
-    });
-    tile.addEventListener("mouseout", () => {
-      playerTile.forEach((tile) => {
-        tile.classList.remove("over");
-      });
-    });
-    tile.addEventListener("click", function placeShip() {
-      for (let i = 0; i < num; i++) {
-        let num = parseInt(tile.value);
-
-        playerTile[num + i].classList.add("ship");
-      }
-      return;
-    });
-  });
-  return;
-}
+function placeShips(num) {}
 
 initGame.addEventListener("click", (event) => {
   event.preventDefault();
