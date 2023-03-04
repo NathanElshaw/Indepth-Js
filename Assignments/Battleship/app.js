@@ -52,11 +52,36 @@ function displayBoards() {
 }
 
 function placeShips(num) {
+  playerTile = document.querySelectorAll("#playerTile");
   playerTile.forEach((tile) => {
-    tile.addEventListener("mouseover", () => {
-      tile.classList.add("over");
+    tile.addEventListener("mouseover", add(tile, num));
+    tile.addEventListener("mouseout", remove(tile, num));
+    tile.addEventListener("click", () => {
+      for (let i = 0; i < num; i++) {
+        let value = parseInt(tile.value);
+        playerTile[value + i].classList.add("ship");
+        
+      }
+      break;
     });
+    
   });
+  function add(tile, size) {
+    for (let i = 0; i < size; i++) {
+      let value = parseInt(tile.value);
+      playerTile[value + i] == undefined
+        ? null
+        : playerTile[value + i].classList.add("over");
+    }
+  }
+  function remove(tile, size) {
+    for (let i = 0; i < size; i++) {
+      let value = parseInt(tile.value);
+      playerTile[value + i] == undefined
+        ? null
+        : playerTile[value + i].classList.remove("over");
+    }
+  }
 }
 
 initGame.addEventListener("click", (event) => {
@@ -65,10 +90,7 @@ initGame.addEventListener("click", (event) => {
   players.init(userName.value, "Ai");
   player = userName.value;
   displayBoards();
-  placeShips(4);
-  placeShips(3);
-  placeShips(2);
-  placeShips(1);
+  placeShips(playerShips[0]);
 });
 
 check.addEventListener("click", () => {
