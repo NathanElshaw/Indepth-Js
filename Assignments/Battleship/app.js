@@ -51,7 +51,13 @@ function displayBoards() {
   });
 }
 
-function placeShips(num) {}
+function placeShips(num) {
+  playerTile.forEach((tile) => {
+    tile.addEventListener("mouseover", () => {
+      tile.classList.add("over");
+    });
+  });
+}
 
 initGame.addEventListener("click", (event) => {
   event.preventDefault();
